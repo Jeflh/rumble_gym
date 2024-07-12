@@ -1,0 +1,182 @@
+-- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+--
+-- Host: localhost    Database: rumble_gym
+-- ------------------------------------------------------
+-- Server version	8.0.29
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `asistencias`
+--
+
+DROP TABLE IF EXISTS `asistencias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `asistencias` (
+  `id_usuario` int NOT NULL,
+  `fecha_asistencia` date NOT NULL,
+  `estado` tinyint NOT NULL,
+  KEY `id_cliente_idx` (`id_usuario`),
+  CONSTRAINT `id_cliente` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `asistencias`
+--
+
+LOCK TABLES `asistencias` WRITE;
+/*!40000 ALTER TABLE `asistencias` DISABLE KEYS */;
+INSERT INTO `asistencias` VALUES (95753,'2022-11-01',1),(95753,'2022-11-02',1),(95753,'2022-11-03',1),(95753,'2022-11-04',1),(95753,'2022-11-05',1),(95753,'2022-11-06',1),(95753,'2022-11-07',1),(95753,'2022-11-08',1),(95753,'2022-11-09',1),(95753,'2022-11-10',0),(95753,'2022-11-11',0),(95753,'2022-11-12',1),(95753,'2022-11-13',1),(95753,'2022-11-14',1),(95753,'2022-11-15',1),(95753,'2022-11-16',1),(95753,'2022-11-17',1),(95753,'2022-11-18',1),(95753,'2022-11-19',1),(95753,'2022-11-20',0),(95753,'2022-11-21',1),(95753,'2022-11-22',1),(82905,'2022-11-01',0),(82905,'2022-11-02',0),(82905,'2022-11-03',1),(82905,'2022-11-04',1),(82905,'2022-11-05',1),(82905,'2022-11-06',1),(82905,'2022-11-07',1),(82905,'2022-11-08',1),(82905,'2022-11-09',1),(82905,'2022-11-10',1),(82905,'2022-11-11',1),(82905,'2022-11-12',1),(82905,'2022-11-13',1),(82905,'2022-11-14',1),(82905,'2022-11-15',1),(82905,'2022-11-16',1),(82905,'2022-11-17',1),(82905,'2022-11-18',1),(82905,'2022-11-19',1),(82905,'2022-11-20',1),(82905,'2022-11-21',1),(82905,'2022-11-22',1),(74194,'2022-11-01',0),(74194,'2022-11-02',0),(74194,'2022-11-03',0),(74194,'2022-11-04',1),(74194,'2022-11-05',0),(74194,'2022-11-06',1),(74194,'2022-11-07',1),(74194,'2022-11-08',1),(74194,'2022-11-09',1),(74194,'2022-11-10',1),(74194,'2022-11-11',1),(74194,'2022-11-12',1),(74194,'2022-11-13',1),(74194,'2022-11-14',1),(74194,'2022-11-15',1),(74194,'2022-11-16',1),(74194,'2022-11-17',1),(74194,'2022-11-18',1),(74194,'2022-11-19',1),(74194,'2022-11-20',1),(74194,'2022-11-21',1),(74194,'2022-11-22',1),(12345,'2022-11-01',1),(12345,'2022-11-02',1),(12345,'2022-11-03',0),(12345,'2022-11-04',0),(12345,'2022-11-05',0),(12345,'2022-11-06',0),(12345,'2022-11-07',1),(12345,'2022-11-08',0),(12345,'2022-11-09',0),(12345,'2022-11-10',1),(12345,'2022-11-11',1),(12345,'2022-11-12',1),(12345,'2022-11-13',1),(12345,'2022-11-14',0),(12345,'2022-11-15',1),(12345,'2022-11-16',1),(12345,'2022-11-17',1),(12345,'2022-11-18',1),(12345,'2022-11-19',1),(12345,'2022-11-20',1),(12345,'2022-11-21',1),(12345,'2022-11-22',1),(11089,'2022-11-24',1),(12345,'2022-11-24',0),(74194,'2022-11-24',0),(82905,'2022-11-24',0),(95753,'2022-11-24',0),(37106,'2022-11-24',1),(11089,'2022-11-01',1),(11089,'2022-11-02',1),(11089,'2022-11-03',1),(11089,'2022-11-04',1),(11089,'2022-11-05',1),(11089,'2022-11-06',1),(11089,'2022-11-07',1),(11089,'2022-11-08',1),(11089,'2022-11-09',1),(11089,'2022-11-10',1),(11089,'2022-11-11',1),(11089,'2022-11-12',1),(95753,'2022-11-13',1),(95753,'2022-11-14',1),(95753,'2022-11-15',1),(95753,'2022-11-16',1),(11089,'2022-11-17',1),(11089,'2022-11-18',1),(11089,'2022-11-19',1),(11089,'2022-11-20',1),(11089,'2022-11-21',1),(11089,'2022-11-22',1),(11089,'2022-11-23',1),(11089,'2022-11-27',1),(12345,'2022-11-27',0),(74194,'2022-11-27',0),(82905,'2022-11-27',0),(95753,'2022-11-27',0),(37106,'2022-11-27',0);
+/*!40000 ALTER TABLE `asistencias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleados`
+--
+
+DROP TABLE IF EXISTS `empleados`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `empleados` (
+  `id_empleado` int NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido_p` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `apellido_m` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `fecha_nac` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `domicilio` varchar(150) NOT NULL,
+  `telefono` varchar(10) NOT NULL,
+  `tipo` int NOT NULL,
+  PRIMARY KEY (`id_empleado`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleados`
+--
+
+LOCK TABLES `empleados` WRITE;
+/*!40000 ALTER TABLE `empleados` DISABLE KEYS */;
+INSERT INTO `empleados` VALUES (11111,'$2y$10$8eOSaETWwK02t8fNurttWeNLBnAga.sDZJLm0tv/n.P44gtcajlW6','José Raúl','David','Corona','2004-11-11','Tonalá','3689543268',1),(12345,'$2y$10$6GplZn49y0DqpsJM/4VwrO81ojcUUYXlxnlUrGOznfrtr.KrnL6Om','Juan Emmanuel','Fernández','de Lara','2000-02-21','Gaspar Antonio','3320582950',1),(77777,'$2y$10$EioVsRqxgjeSxVzdSRpDCeOKxjkR5Tr2IAtDaQ5GySU3P3BGxbvcG','Gilberto','Suarez','Esparza','1982-05-15','Av. Comprisa 658','3376541108',3),(88888,'$2y$10$D2p.ZoHpz3tbqK4hC.KGAO4c4.OhuqfzYx0WKWZU5SNHyf9qTCWNO','Julian','Ordaz','Fuentes','2002-09-19','Calle Matamoros 4444','3366994854',2),(99999,'$2y$10$5qoqJmjX5B6ZNop0mIcx6.jrHgWXKb4bUj12Y4EHhjMquBrrXll4u','Juan José','Salazar','Villegas','1995-05-04','Cerro del 4','1231231231',1);
+/*!40000 ALTER TABLE `empleados` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `productos`
+--
+
+DROP TABLE IF EXISTS `productos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `productos` (
+  `id_producto` int NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `descripcion` varchar(200) NOT NULL,
+  `cantidad` int NOT NULL,
+  `precio` float NOT NULL,
+  PRIMARY KEY (`id_producto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `productos`
+--
+
+LOCK TABLES `productos` WRITE;
+/*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+INSERT INTO `productos` VALUES (15100,'Faja ','Calidad de curo de acapotzalco',4,295),(15101,'Bote plastico','Bote graduado de 1L.',15,210),(15102,'Toalla Fraydey','30 x 15cm, 100% algodón.',19,100),(15103,'Vitamina B','Vitamina para vitaminarte.',22,249),(15104,'Malla','Malla deportiva unitalla.',1,249),(15105,'Botella de agua','Botella Epurita de 500mlts.',14,17),(15106,'Gatorade Ponche','Sabor Limón de 1L',19,25),(15107,'Bebida Amper','Bebida energética carbonatada.',40,17),(15108,'Proteína Whey','Protenia sabor platano 500gr.',15,350),(15109,'Carnitina','Marca esencial 1200gr.',46,299),(15110,'Creatinina','Marca Power 350gr.',6,320),(15111,'Cafeina','Marca Gat-sports 100gm.',10,330),(15112,'Glutenamina','Marca ForzaGen 330gr.',10,480),(15113,'Aminoacidos','Marca ForzaGen 360gr.',17,439),(15114,'Proteina PRO','Marca ForzaGen 2900gr.',6,1375);
+/*!40000 ALTER TABLE `productos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `id_usuario` int NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido_p` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `apellido_m` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `sexo` varchar(1) NOT NULL,
+  `fecha_nac` date NOT NULL,
+  `peso` float NOT NULL,
+  `altura` float NOT NULL,
+  `imc` float NOT NULL,
+  `domicilio` varchar(150) NOT NULL,
+  `telefono` varchar(10) NOT NULL,
+  `estado` tinyint NOT NULL,
+  `tipo_suscripcion` int NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `inscrito` date NOT NULL,
+  PRIMARY KEY (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (11089,'Paola','Novelo','González','F','1999-08-11',55,1.6,21.4844,'Hacienda Guadalupe','3366887799',1,3,'2022-11-24','2023-05-24','2022-11-24'),(12345,'Juan Emmanuel','Fernández','de Lara','M','2000-02-21',90,1.89,25.2,'Gaspar Antonio 42','3324282110',1,1,'2022-11-24','2022-12-24','2022-11-24'),(37106,'Daniel','Fernandez','De Lara','M','2007-08-17',60,1.78,18.937,'Circunvalación 656','3369874510',0,1,'2022-11-24','2022-12-24','2022-11-23'),(74194,'Lachin','Berenice','Valeria','F','2001-02-08',67,1.67,24.0238,'Allá con el chente','3366998877',1,3,'2022-11-23','2023-02-23','2022-11-21'),(82905,'Josue Daniel','Rodriguez','Lozano','M','1985-01-01',123,1.8,37.963,'Av. Aztlan 153','1231231231',1,4,'2022-11-23','2023-11-23','2022-11-22'),(95753,'Diego','Montoya','Mariscal','M','2010-11-03',75,1.72,25.3515,'La paz 1368','3347811969',1,2,'2022-11-23','2023-02-23','2022-11-20');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ventas`
+--
+
+DROP TABLE IF EXISTS `ventas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ventas` (
+  `id_venta` int NOT NULL AUTO_INCREMENT,
+  `id_empleado` int NOT NULL,
+  `fecha_venta` date NOT NULL,
+  `monto_venta` float NOT NULL,
+  `tipo` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id_venta`),
+  KEY `id_empleado_idx` (`id_empleado`),
+  CONSTRAINT `id_empleado` FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id_empleado`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ventas`
+--
+
+LOCK TABLES `ventas` WRITE;
+/*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
+INSERT INTO `ventas` VALUES (1,12345,'2022-11-21',117,1),(2,12345,'2022-11-24',846,1),(3,12345,'2022-11-22',341,1),(4,12345,'2022-11-20',287,1),(5,12345,'2022-11-24',468,1),(6,12345,'2022-11-24',514,1),(7,99999,'2022-11-22',300,2),(8,99999,'2022-11-23',1620,2),(9,99999,'2022-11-22',2880,2),(10,99999,'2022-11-23',855,2),(11,12345,'2022-11-24',300,2),(12,12345,'2022-11-24',1620,2),(13,12345,'2022-11-24',2880,2),(14,12345,'2022-11-24',300,2),(15,12345,'2022-11-24',300,2),(16,88888,'2022-11-24',295,1),(17,88888,'2022-11-24',17,1),(18,88888,'2022-11-24',17,1),(19,12345,'2022-11-24',266,1),(20,12345,'2022-11-24',439,1),(21,12345,'2022-11-24',17,1);
+/*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'rumble_gym'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-11-27 22:42:36

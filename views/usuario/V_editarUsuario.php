@@ -142,7 +142,10 @@ require_once 'includes/navLogueado.php';
               <option <?php if($usuario['tipo_suscripcion'] == '4') echo 'selected';?> >4- Anual - $2880</option>
             </select>
           </div>
+          <!-- Se envia el id del usuario para poder actualizarlo -->
           <input type="hidden" id="id_usuario" name="id_usuario" value="<?php echo $usuario['id_usuario'];?>">
+          <?php $usuarioRutina =  $usuario['id_usuario']?>
+          <input type="hidden" id="id_usuario" name="id_usuario" value="<?php $usuarioRutina;?>">
           <div class="d-flex justify-content-center mt-2 mb-3">
             <button type="submit" class="btn btn-primary mt-2">Actualizar usuario</button>
           </div>

@@ -33,12 +33,7 @@ class PanelController{
     }
   }
 
-  #public function nuevaRutina(){
-  #  if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  #    require_once('views/rutinas/V_nuevaRutinas.php');
-  #  }
-    
-  #}
+
 
 }
 

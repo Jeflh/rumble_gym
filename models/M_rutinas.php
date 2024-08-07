@@ -17,9 +17,6 @@ class RutinasModel {
 
   private $lista;
 
-  
-
-
 
   public function __construct(){
     $this->db = Conectar::conexion();

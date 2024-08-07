@@ -116,6 +116,7 @@ require_once 'includes/navLogueado.php';
             </tr>
           </thead>
           <tbody>
+            <!-- Aquí se muestran los productos -->
             <?php foreach ($_SESSION['productos'] as $producto) : ?>
               <tr class="table-default">
                 <th scope="row"><?php echo $producto['id_producto']; ?></th>

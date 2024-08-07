@@ -112,6 +112,7 @@ $usuario = $_SESSION['usuario'];
           <p class="card-text">Presiona para generar una rutina</p>
 
           <div class="d-flex justify-content-center">
+            
             <form action="index.php?c=rutinas" method="POST">
               <input type="hidden" id="id" name="id" value="<?php echo $usuario['id_usuario'];?>">
               <button type="submit" class="btn btn-light">Crear Nueva Rutina</button>
@@ -122,12 +123,24 @@ $usuario = $_SESSION['usuario'];
           <!-- CONSULTAR RUTINAS -->
           <p class="card-text mt-4">Presiona para consultar tus rutinas</p>
           <div class="d-flex justify-content-center">
-            <form action="index.php?c=rutinas" method="POST">
+            <form action="index.php?c=rutinas&a=editar" method="POST">
               <input type="hidden" id="id" name="id" value="<?php echo $usuario['id_usuario'];?>">
               <button type="submit" class="btn btn-light">Ver Mis Rutinas</button>
             </form>
             <!-- <a href="index.php?c=rutinas" class="btn btn-light">Probar</a> -->
           </div>
+
+
+          <!-- PRUEBA RUTINA -->
+          <p class="card-text mt-4">Presiona para consultar tus rutinas</p>
+          <div class="d-flex justify-content-center">
+            <a href="index.php?c=prueba" class="link-light">
+              <button type="submit" class="btn btn-light">Ver Mis Rutinas</button>
+            </form>
+            <!-- <a href="index.php?c=rutinas" class="btn btn-light">Probar</a> -->
+          </div>
+          
+
         </div>
         
       </div>

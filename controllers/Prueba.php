@@ -62,10 +62,6 @@ class PruebaController{
   }
 
 
-
-
-
-
   # PRUEBA 
   public function insertar(){ // Función para insertar una rutina
     //if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -76,7 +72,6 @@ class PruebaController{
         foreach($usuarios as $usuario){//por cada uno de estos hacer un foreach
           $userRutinas = $this->pruebaModel->getRutinasUser($usuario['id_usuario']);
         }
-
         foreach($usuarios as $usuario){
           foreach($userRutinas as $userRutina){
             if($usuario['id_usuario'] == $userRutina['id_usuario']){

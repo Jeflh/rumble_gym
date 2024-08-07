@@ -51,8 +51,6 @@ class RutinasModel {
     return $row;
   }
 
-  
-  
   // Inserta valores a la tabla rutinasuser
   public function insertRutina($usuario){
     

@@ -85,13 +85,14 @@ $usuario = $_SESSION['usuario'];
               <div class="d-flex text-center justify-content-center mt-5 mb-7">
                 <!-- <form action="index.php?c=rutinas&a=inicio" method="POST"> 
                 <button type="submit" class="btn btn-primary">Crear rutinaaaaaaaaaaa</button>  -->
-                
+                <button type="submit" class="btn btn-primary">Ingresar datos a rutinauser</button>
 
-                
-                
-                <!-- <a href="index.php?c=rutinas&a=inicio" class="btn btn-primary">Crear Rutina</a> -->
-                <button type="submit" class="btn btn-primary">Crear rutinaa</button>
+              </div>
 
+
+              <!-- <BOTON PRUEBA PARA VER ELEMENTOS EN LISTA> -->
+              <div class="d-flex text-center justify-content-center mt-4 mb-2">                
+                <a href="index.php?c=rutinas&a=inicio" class="btn btn-primary">Ver Lista</a>
               </div>
 
             </fieldset> 

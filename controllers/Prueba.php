@@ -46,7 +46,7 @@ class PruebaController{
       foreach($pruebas as $prueba){*/
     $usuario = $_SESSION['usuario'];
     $prueba = $this->pruebaModel->verRutinas($usuario['id_usuario']);
-    if($usuario['id_usuario'] == $prueba['id_usuario']){
+    if($_SESSION['usuario'] == true){
       $prueba = $this->pruebaModel->getData($prueba['id_usuario']);
       require_once('views/usuario/V_inicioPrueba.php');
     }

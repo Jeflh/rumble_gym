@@ -3,9 +3,7 @@
 class RutinasController{
   private $db;
   private $auth;
-
   private $rutinaModel;
-
   private $usuarioModel; //
 
   public function __construct(){
@@ -14,9 +12,12 @@ class RutinasController{
 
     require_once ('models/M_rutinas.php');
     require_once('models/M_usuario.php');
-    $this->rutinaModel = new RutinasModel();
     
+    // Modelo de Rutinas
+    $this->rutinaModel = new RutinasModel();
+    // Modelo de Usuario
     $this->usuarioModel = new UsuarioModel(); //
+    $usuarios = new UsuarioModel();
 
     if(!$this->auth){
       header("Location: index.php?c=panel");
@@ -24,15 +25,9 @@ class RutinasController{
   }
 
 
-  
-  
-
-
   /* Visualización Panel de Nuevas Rutinas*/
   public function index(){
     require_once('views/rutinas/V_nuevaRutinas.php');
-    
-    
   }
 
   public function inicio(){ // Función para mostrar la rutina personalizada del usuario
@@ -53,82 +48,18 @@ class RutinasController{
 
   # PRUEBA 
   public function insertar(){ // Función para insertar una rutina
-    //if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if(isset($_POST)){
-        $usuarios = $this->usuarioModel->getAll();
-        //$fechaActual = date('Y-m-d');
-        //$fechaCorte = date('Y-m-d', strtotime($fechaActual . ' - 1 month'));
-        
-        //$userRutinas = $this->rutinaModel->getRutinasUser($usuario['id_usuario']);
-        
-
-        foreach($usuarios as $usuario){
-          foreach($userRutinas as $userRutina){
-            if($usuario['id_usuario'] == $userRutina['id_usuario']){
-    
-              /*if($userRutina['estado'] == '1'){
-                $sumaAsistencia++;
-              }*/
-
-              /*$datosRutinas = array(
-                'id_usuario' => $usuario['id_usuario'],
-                'nombre' => $_POST['nombre_rutina'],
-                'tipo' => $_POST['tipo'],
-                'dias' => $_POST['dias'],
-                'duracion' => $_POST['duracion']
-              );*/
-      
-              $insertar = $this->rutinaModel->insertRutina($userRutina);
-              if($insertar){
-                echo "Rutina insertada correctamente :D";
-                
-                //require_once('views/rutinas/V_editarRutinas.php');
-              }
-              else{
-                echo "Error al insertar la rutina a la base de datos";
-              }
-            }
-          }
-          /*$lista [] = array(
-            'id_usuario' => $usuario['id_usuario'],
-            'nombreRutina' => $userRutinas['nombre_rutina'],
-            'tipoRutina' => $userRutinas['tipo_rutina'],
-            'dias_d' => $userRutinas['dias_d'],
-            'duracion' => $userRutinas['duracion']
-          );
-          
-          
-          
-          
-          */
-
-
-
-
-
-          
-        }
-        
-        
-        
-        
-
-        /*if($insertar){
-          //$consulta = $this->rutinaModel->consultaRutinasUser($id_usuario);
-          //$dias = $this->rutinaModel->recomendarRutinaDia($id_usuario, $diasD);
+        $resultado = $this->rutinaModel->insertRutina(); //
+        if ($resultado) {
           echo "Rutina insertada correctamente :D";
-          require_once('views/rutinas/V_pruebaRutinas.php');
+          //header('Location: index.php?c=rutinas&a=insertar&e=0');
         }
         else{
-          echo "Error al insertar la rutina a la base de datos";
-        }*/
-        //$this->rutinaModel->insertRutina('pendiente');
-        //header("Location: index.php?c=panel");
+          echo "Error al insertar la rutina a la base de datos :(";
+        }
+
+        require_once('views/prueba/V_inicioPrueba.php');   
       }
-      
-      
-    //}
-    
   }
 
 

@@ -132,10 +132,10 @@ $usuario = $_SESSION['usuario'];
 
 
           <!-- PRUEBA RUTINA -->
-          <p class="card-text mt-4">Presiona para consultar tus rutinas</p>
+          <p class="card-text mt-4">BOTON PRUEBA</p>
           <div class="d-flex justify-content-center">
             <a href="index.php?c=prueba" class="link-light">
-              <button type="submit" class="btn btn-light">Ver Mis Rutinas</button>
+              <button type="submit" class="btn btn-light">BOTON PRUEBA</button>
             </form>
             <!-- <a href="index.php?c=rutinas" class="btn btn-light">Probar</a> -->
           </div>

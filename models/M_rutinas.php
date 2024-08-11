@@ -12,7 +12,7 @@ class RutinasModel {
   private $id_rutina;
   private $nombre_rutina;
   private $tipo_rutina;
-  private $dias_d;
+  private $dias;
   private $duracion;
 
   private $lista;
@@ -33,8 +33,8 @@ class RutinasModel {
     $this->id_rutina = 0;
     $this->nombre_rutina = '';
     $this->tipo_rutina = '';
-    $this->dias_d = '';
-    $this->duracion = '';
+    $this->dias = '';
+    $this->duracion= '';
   }
 
 
@@ -57,29 +57,26 @@ class RutinasModel {
   
   
   // Inserta valores a la tabla rutinasuser
-  public function insertRutina($usuario){
-    
+  public function insertRutina(){
     if(isset($_POST)){
-      //$id_usuario = $usuario['id_usuario'];
-      //$this->id_usuario = mysqli_real_escape_string($this->db, $_POST['id_usuario']); // Reparar
-      /*$nombre_rutina = $this->nombre_rutina = mysqli_real_escape_string($this->db, $_POST['nombre_rutina']);  
-      $tipo_rutina = $this->tipo_rutina = mysqli_real_escape_string($this->db, $_POST['tipo_rutina']); // Reparar
-      $dias_d = $this->dias_d = mysqli_real_escape_string($this->db, $_POST['dias_d']); // Reparar
-      $duracion = $this->duracion = mysqli_real_escape_string($this->db, $_POST['duracion']);*/
-
-      $this->id_usuario = $usuario['id_usuario'];
+      
       $this->nombre_rutina = mysqli_real_escape_string($this->db, $_POST['nombre_rutina']);  
       $this->tipo_rutina = mysqli_real_escape_string($this->db, $_POST['tipo_rutina']); // Reparar
-      $this->dias_d = mysqli_real_escape_string($this->db, $_POST['dias_d']); // Reparar
+      $this->dias = mysqli_real_escape_string($this->db, $_POST['dias']); // Reparar
       $this->duracion = mysqli_real_escape_string($this->db, $_POST['duracion']);
-    
-      $error = ""; // Variable para almacenar los errores.
 
+      /*IMPORTANTE
+      $usuarioRutina = $this->getRutina($this->id_usuario); // Obtenemos los datos del usuario y la rutina.
+      $this->nombre_rutina = $usuarioRutina['tipo_suscripcion'];*/
+
+      $usuario = $_SESSION['usuario']; // Obtener el usuario de la sesión
+      $this->id_usuario = $usuario['id_usuario']; // Obtener el ID del usuario
+      
+      $error = ''; // Variable para almacenar los errores.
       if(empty($this->nombre_rutina) || strlen($this->nombre_rutina) > 45){ // Comprobamos que el nombre no esté vacío y que no supere los 50 caracteres.
-        $error .= "1";
+        $error .= '1';
       }
-
-      if($error == ""){ // Si no hay errores, se inserta el producto.
+      if($error == ''){ // Si no hay errores, se inserta el producto.
 
         $this->id_rutina = generarId();
         $existe = $this->getRutina($this->id_rutina);
@@ -87,32 +84,24 @@ class RutinasModel {
           $this->id_rutina = generarId();
           $existe = $this->getRutina($this->id_rutina);
         }
-        //$queryUser = $this->db->query("INSERT INTO rutinasuser (id_usuario)  VALUES('$id_usuario");
-        $query = $this->db->query("INSERT INTO rutinasuser VALUES('$this->id_usuario', '$this->id_rutina',  '$this->nombre_rutina', '$this->tipo_rutina', '$this->dias_d', '$this->duracion')");
 
+        $query  = $this->db->query("INSERT INTO rutinasuser (id_usuario, id_rutina, nombre_rutina, tipo_rutina, dias_d, duracion_sesiones) 
+        VALUES ('$this->id_usuario', '$this->id_rutina', '$this->nombre_rutina', '$this->tipo_rutina', '$this->dias', '$this->duracion')");
+ 
         if($query){
+          echo "Rutina insertada correctamente C:";
           return true; // Si se inserta correctamente, se devuelve true.
         }
         else{
+          //echo "Error al insertar la rutina a la base de datos :C " . $this->db->error;
+          //echo $this->id_usuario . " " . $this->id_rutina . " " . $this->nombre_rutina . " " . $this->tipo_rutina . " " . $this->dias . " " . $this->duracion . " ";
           return false; // Si no, se devuelve false.
         }
       }else{
         header("Location:index.php?c=rutinas&e=" . $error); 
         // Si hay errores, se redirige a la página de nuevo producto con los errores.
       }
-
-      /*
-      $id_usuario = $rutina['id_usuario'];
-      $tipo_rutina = $rutina['tipo_rutina'];
-      $dias_d = $rutina['dias_d'];
-      $duracion = $rutina['duracion']; */
-
-
-      
-      //$query = $this->db->query("INSERT INTO rutinasuser (id_usuario, nombre_rutina, tipo_rutina, dias_d, duracion)  VALUES('$id_usuario', '$nombre_rutina', '$tipo_rutina', '$dias_d', '$duracion')");
-
     }
-
   }
 
   public function consultaRutinasUser($usuario){
@@ -195,6 +184,8 @@ class RutinasModel {
     }
     
   }*/
+
+
 
   public function obtenerNombreDia($numeroDia) {
     // Obtener el nombre del día según el número (1 para lunes, 2 para martes, ..., 7 para domingo)
@@ -325,6 +316,7 @@ class RutinasModel {
     return $this->rutinasuser;
   }
 
+  
   public function insertRutinaUserID(){
     if(isset($_POST)){
       //$id_usuario = $usuario['id_usuario'];
@@ -340,13 +332,13 @@ class RutinasModel {
       }
     }
   }
-  public function insertRutinaUser($usuario){
-    if(isset($_POST)&&isset($usuario)){
+  public function insertRutinaUser(){
+    if(isset($_POST)){
       $nombre_rutina = mysqli_real_escape_string($this->db, $_POST['nombre_rutina']);
       $tipo_rutina = mysqli_real_escape_string($this->db, $_POST['tipo_rutina']);
-      $dias_d = mysqli_real_escape_string($this->db, $_POST['dias_d']);
+      $dias = mysqli_real_escape_string($this->db, $_POST['dias']);
       $duracion = mysqli_real_escape_string($this->db, $_POST['duracion']);
-      $query = $this->db->query("INSERT INTO rutinasuser (nombre_rutina, tipo_rutina, dias_d, duracion) VALUES('$nombre_rutina', '$tipo_rutina', '$dias_d', '$duracion')");
+      $query = $this->db->query("INSERT INTO rutinasuser (nombre_rutina, tipo_rutina, dias, duracion) VALUES('$nombre_rutina', '$tipo_rutina', '$dias', '$duracion')'");
 
       if($query){
         return true;

@@ -22,12 +22,12 @@ $usuario = $_SESSION['usuario'];
 
         $status = $_GET['e'];
 
-        if ($status == '0') {
+        if ($status == '1') {
           echo '<div class="text-center alert alert-dismissible alert-success mb-2">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Rutina añadida</strong>, la rutina ha sido añadido correctamente.
           </div>';
-        }
+        }/*
         if ($status == '1') {
           echo '<div class="text-center alert alert-dismissible alert-success mb-2">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
@@ -39,13 +39,14 @@ $usuario = $_SESSION['usuario'];
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Producto eliminado</strong>, el producto ha sido eliminado correctamente.
           </div>';
-        }
+        }*/
       }
     ?>
     <table class="table table-dark table-striped table-bordered table-hover text-center">
       <thead>
         <tr>
           <th scope="col">ID</th>
+          <th scope="col">ID Rutina</th>
           <th scope="col">Nombre</th>
           <th scope="col">Tipo de Rutina</th>
           <th scope="col">Dias Disponibles por Semana</th>
@@ -54,14 +55,14 @@ $usuario = $_SESSION['usuario'];
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($pruebas as $prueba) : ?>
+        <?php foreach ($rutinas as $rutina) : ?>
           <tr class="table-default">
-            <th scope="row"><?php echo $prueba['id_usuario']; ?></th>
-            <td><?php echo $prueba['id_rutina']; ?></th>
-            <td><?php echo $prueba['nombre_rutina']; ?></td>
-            <td><?php echo $prueba['tipo_rutina']; ?></td>
-            <td><?php echo $prueba['dias_d']; ?></td>
-            <td><?php echo $prueba['duracion_sesiones']; ?></td>
+            <th scope="row"><?php echo $rutina['id_usuario']; ?></th>
+            <td><?php echo $rutina['id_rutina']; ?></th>
+            <td><?php echo $rutina['nombre_rutina']; ?></td>
+            <td><?php echo $rutina['tipo_rutina']; ?></td>
+            <td><?php echo $rutina['dias_d']; ?></td>
+            <td><?php echo $rutina['duracion_sesiones']; ?></td>
             <td>
    
               <a class="btn btn-primary btn-sm me-2 text-light" href="index.php?c=rutina&a=editar&id=<?php echo $prueba['id_rutina']; ?>">

@@ -25,21 +25,32 @@ class RutinasController{
   }
 
 
+  public function index(){ // Función para mostrar todas las rutinas del usuario
+    $usuario = $_SESSION['usuario'];
+    $rutinas = $this->rutinaModel->getRutinasUser($usuario['id_usuario']); // Se obtienen las rutinas del usuario
+    require_once('views/prueba/V_inicioPrueba.php');
+  }
+
+
+
+
   /* Visualización Panel de Nuevas Rutinas*/
-  public function index(){
+  public function nueva(){
     require_once('views/rutinas/V_nuevaRutinas.php');
   }
 
   public function inicio(){ // Función para mostrar la rutina personalizada del usuario
-    require_once('views/rutinas/V_inicioRutinas.php');
+
+    require_once('views/rutinas/V_inicioPrueba.php');
   }
 
 
   public function editar(){ // Función para mostrar todas las rutinas del usuario
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $id_usuario = $_POST['id_usuario'];
+      $usuario = $_SESSION['id_usuario'];
+
       //$rutinasuser = $this->rutinaModel->getRutinasUser($_SESSION['id_usuario']);
-      $rutinasuser = $this->rutinaModel->getRutinasUser($id_usuario);
+      $rutinas = $this->rutinaModel->getRutinasUser($usuario['id_usuario']);
       require_once('views/rutinas/V_editarRutinas.php');
     }
   }
@@ -52,13 +63,18 @@ class RutinasController{
         $resultado = $this->rutinaModel->insertRutina(); //
         if ($resultado) {
           echo "Rutina insertada correctamente :D";
-          //header('Location: index.php?c=rutinas&a=insertar&e=0');
+          //
+          $usuario = $_SESSION['usuario'];
+          $rutinas = $this->rutinaModel->getRutinasUser($usuario['id_usuario']);
+          header('Location: index.php?c=rutinas&a=insertar&e=0');
+          //require_once('views/prueba/V_inicioPrueba.php');   
         }
         else{
           echo "Error al insertar la rutina a la base de datos :(";
         }
-
-        require_once('views/prueba/V_inicioPrueba.php');   
+        // 
+        
+        
       }
   }
 

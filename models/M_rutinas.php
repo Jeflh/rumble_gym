@@ -6,18 +6,23 @@ class RutinasModel {
   private $rutinas;
   private $rutinasuser;
   
-  // Verificar si es necesario
+  // Variables de la tabla rutinasuser
   private $id_usuario;
 
   private $id_rutina;
   private $nombre_rutina;
-  private $tipo_rutina;
+  private $tipo_rutina; // Compartida
   private $dias;
   private $duracion;
 
   private $lista;
 
-  
+  // Variables de la tabla rutinas (PENDIENTES DE USAR)
+  private $id_ejercicio;
+  private $tipo_rutina_ejercicio; // Por si la otra no jala
+  private $nombre_ejercicio;
+  private $descripcion;
+  private $imagen_url;
 
 
 
@@ -72,11 +77,11 @@ class RutinasModel {
       $usuario = $_SESSION['usuario']; // Obtener el usuario de la sesión
       $this->id_usuario = $usuario['id_usuario']; // Obtener el ID del usuario
       
-      $error = ''; // Variable para almacenar los errores.
+      $error = ""; // Variable para almacenar los errores.
       if(empty($this->nombre_rutina) || strlen($this->nombre_rutina) > 45){ // Comprobamos que el nombre no esté vacío y que no supere los 50 caracteres.
-        $error .= '1';
+        $error .= "1"; 
       }
-      if($error == ''){ // Si no hay errores, se inserta el producto.
+      if($error == ""){ // Si no hay errores, se inserta el producto.
 
         $this->id_rutina = generarId();
         $existe = $this->getRutina($this->id_rutina);
@@ -103,6 +108,9 @@ class RutinasModel {
       }
     }
   }
+
+
+
 
   public function consultaRutinasUser($usuario){
     $id_usuario = $usuario['id_usuario'];

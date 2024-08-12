@@ -113,7 +113,7 @@ $usuario = $_SESSION['usuario'];
 
           <div class="d-flex justify-content-center">
             
-            <form action="index.php?c=rutinas" method="POST">
+            <form action="index.php?c=rutinas&a=nueva" method="POST"> <!-- index.php?c=rutinas -->
               <input type="hidden" id="id" name="id" value="<?php echo $usuario['id_usuario'];?>">
               <button type="submit" class="btn btn-light">Crear Nueva Rutina</button>
             </form>
@@ -123,7 +123,7 @@ $usuario = $_SESSION['usuario'];
           <!-- CONSULTAR RUTINAS -->
           <p class="card-text mt-4">Presiona para consultar tus rutinas</p>
           <div class="d-flex justify-content-center">
-            <form action="index.php?c=rutinas&a=editar" method="POST">
+            <form action="index.php?c=rutinas" method="POST"> <!-- index.php?c=rutinas&a=editar -->
               <input type="hidden" id="id" name="id" value="<?php echo $usuario['id_usuario'];?>">
               <button type="submit" class="btn btn-light">Ver Mis Rutinas</button>
             </form>
@@ -134,8 +134,10 @@ $usuario = $_SESSION['usuario'];
           <!-- PRUEBA RUTINA -->
           <p class="card-text mt-4">BOTON PRUEBA</p>
           <div class="d-flex justify-content-center">
-            <a href="index.php?c=prueba" class="link-light">
-              <button type="submit" class="btn btn-light">BOTON PRUEBA</button>
+            <form action="index.php?c=rutinas&a=insertar" method="POST">
+              <input type="hidden" id="id" name="id" value="<?php echo $usuario['id_usuario'];?>">
+              <button type="submit" class="btn btn-light">BOTON PRUEBAA</button>
+              <!-- <a href="index.php?c=rutinas&a=insertar" class="link-light"> Probar</a> -->
             </form>
             <!-- <a href="index.php?c=rutinas" class="btn btn-light">Probar</a> -->
           </div>

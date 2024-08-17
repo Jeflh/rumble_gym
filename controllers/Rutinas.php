@@ -67,6 +67,12 @@ class RutinasController{
           //
           $usuario = $_SESSION['usuario'];
           $rutinas = $this->rutinaModel->getRutinasUser($usuario['id_usuario']);
+          $tipo_rutina = $rutinas['tipo_rutina'];
+          $dias_d = $rutinas['dias_d'];
+          $id_rutina = $rutinas['id_rutina'];
+          //$rutinaDelDia = $this->rutinaModel->recomendarRutinaPRUEBA_UNO('Cardio', 4);
+          
+          $this->rutinaModel->recomendarRutinaPRUEBA_UNO($tipo_rutina, $dias_d);
           header('Location: index.php?c=rutinas&a=insertar&e=0');
           //require_once('views/prueba/V_inicioPrueba.php');   
         }
@@ -92,19 +98,16 @@ class RutinasController{
         $id_usuario = $usuario['id_usuario'];
         $tipo_rutina = $rutinas['tipo_rutina'];
         $dias_d = $rutinas['dias_d'];
-        $this->rutinaModel->guardarRutinaConEjercicios($id_usuario, $tipo_rutina, $dias_d);
-        /*
-        $dias_d = $rutinas['dias_d'];
-        $bloquesPorDia = [
-            'dia1' => $rutinas['dia1'],
-            'dia2' => $rutinas['dia2'],
-            'dia3' => $rutinas['dia3'],
-            'dia4' => $rutinas['dia4'],
-            'dia5' => $rutinas['dia5'],
-            'dia6' => $rutinas['dia6'],
-            'dia7' => $rutinas['dia7']
-        ];
-        $this->imprimirRutina($dias_d, $bloquesPorDia, $rutinas, $usuario);*/
+        $id_rutina = $rutinas['id_rutina'];
+          //$rutinaDelDia = $this->rutinaModel->recomendarRutinaPRUEBA_UNO('Cardio', 4);
+          
+        $this->rutinaModel->recomendarRutinaPRUEBA_UNO($tipo_rutina, $dias_d);
+
+
+        
+        //$this->rutinaModel->guardarRutinaConEjercicios($id_usuario, $tipo_rutina, $dias_d);
+        
+       
       }
       else{
         echo " NO FUNCIONA :( ";

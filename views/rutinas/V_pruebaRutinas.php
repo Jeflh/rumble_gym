@@ -13,15 +13,7 @@ $rutinas = $_SESSION['rutina'];
     ?>
 
     <?php     
-    if($rutina['tipo_rutina'] == 'Fuerza'  || $_GET['tipo_rutina'] == 'Fuerza') {
-      echo 'Fuerza';
-    }
-    else if($rutina['tipo_rutina'] == 'Cardio'|| $_GET['tipo_rutina'] == 'Cardio'){
-      echo 'Cardio';
-    }
-    else if($rutina['tipo_rutina'] == 'Flexibilidad'|| $_GET['tipo_rutina'] == 'Flexibilidad'){
-      echo 'Flexibilidad';
-    }
+    
     ?>
     </h2>
       <!-- FUNCION obtenerDia  -->

@@ -90,6 +90,11 @@ $usuario = $_SESSION['usuario'];
                 <a href="index.php?c=rutinas&a=inicio" class="btn btn-primary">Ver Lista</a>
               </div>
 
+              <!-- BOTON PRUEBAS PARA NUEVO PANEL DE RECOMENDACION DE RUTINAS -->
+              <div class="d-flex text-center justify-content-center mt-4 mb-2">                
+                <a href="index.php?c=rutinas&a=recomendacion" class="btn btn-primary">PRUEBA Recomendar Rutina</a>
+              </div>
+
             </fieldset> 
           </form>
         </div>

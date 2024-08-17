@@ -131,15 +131,15 @@ $usuario = $_SESSION['usuario'];
           </div>
 
 
-          <!-- PRUEBA RUTINA -->
+          <!-- PRUEBA RUTINA -
           <p class="card-text mt-4">BOTON PRUEBA</p>
           <div class="d-flex justify-content-center">
-            <form action="index.php?c=rutinas&a=insertar" method="POST">
+            <form action="index.php?c=rutinas&a=recomendacion" method="POST">
               <input type="hidden" id="id" name="id" value="<?php echo $usuario['id_usuario'];?>">
               <button type="submit" class="btn btn-light">BOTON PRUEBAA</button>
-              <!-- <a href="index.php?c=rutinas&a=insertar" class="link-light"> Probar</a> -->
+              <a href="index.php?c=rutinas&a=insertar" class="link-light"> Probar</a> 
             </form>
-            <!-- <a href="index.php?c=rutinas" class="btn btn-light">Probar</a> -->
+           <a href="index.php?c=rutinas" class="btn btn-light">Probar</a> -->
           </div>
           
 

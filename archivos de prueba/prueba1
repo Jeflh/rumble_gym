@@ -52,7 +52,7 @@ function recomendarRutinaPorDia($dia) {
         $rutinaDia = $_SESSION['rutina'][$dia];
     } else {
         // Consulta para obtener todos los ejercicios recomendados según la meta y experiencia del usuario
-        $consultaEjercicios = "SELECT * FROM ejercicios WHERE dificultad = '{$_SESSION['experiencia_actual']}' AND objetivo = '{$_SESSION['meta_actual']}' ORDER BY RAND()";
+        $consultaEjercicios = "SELECT * FROM ejercicios WHERE dificultad = '{$_SESSION['experiencia_actual']}' AND objetivo = '{$_SESSION['meta_actual']}' ORDER BY RAND()"; // Ordenar aleatoriamente OJO
         $resultadoEjercicios = mysqli_query($conexion, $consultaEjercicios);
 
         if (!$resultadoEjercicios) {

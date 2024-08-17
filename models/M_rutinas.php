@@ -24,6 +24,8 @@ class RutinasModel {
   private $descripcion;
   private $imagen_url;
 
+  private $id_dia;
+
 
 
   public function __construct(){
@@ -357,23 +359,297 @@ class RutinasModel {
   }
 
 
+
+  // Función para obtener el último dato de la tabla rutinasuser
+  public function getUltimoDato($id_usuario){
+    $query = $this->db->query("SELECT * FROM rutinasuser WHERE id_usuario = '$id_usuario' ORDER BY created_at DESC LIMIT 1");
+    if ($query->num_rows > 0) {
+      return $query->fetch_assoc(); // Retorna un único registro
+    }
+    return null; // Retorna nulo si no hay registros
+    if($query){
+      echo "Busqueda exitosa";
+      return true;
+    } else{
+      echo "Error en la Busqueda: " . $this->db->error; // Añade esta línea para ver el error de la base de datos
+      return false;
+    }
+  }
+
+
+// *************************************************************************************************************
+
+ // FUNCIONES PARA EJERCICIOS 
+  public function getAllEjercicios(){
+    $query = $this->db->query("SELECT * FROM rutinas");
+    while($row = $query->fetch_assoc()) {
+      $this->rutinas[] = $row;
+    }
+    return $this->rutinas;
+  }
+
+
+
+/*
+  public function guardarRutinaConBloques($id_usuario, $nombre_rutina, $tipo_rutina, $dias_d, $duracion) {
+    // Generar aleatoriamente el número de bloques para cada día
+    $bloquesPorDia = [];
+    for ($i = 1; $i <= $dias_d; $i++) {
+        $bloquesPorDia[$i] = rand(3, 4);  // Generar 3 o 4 bloques por día
+    }
+
+    // Construir el query para guardar la rutina con los bloques generados
+    $query = "INSERT INTO rutinasuser (id_usuario, nombre_rutina, tipo_rutina, dias_d, duracion, dia1, dia2, dia3, dia4, dia5, dia6, dia7) VALUES ('$id_usuario', '$nombre_rutina', '$tipo_rutina', '$dias_d', '$duracion',";
+
+    // Añadir los valores de los bloques por día al query
+    for ($i = 1; $i <= 7; $i++) {
+        $query .= isset($bloquesPorDia[$i]) ? $bloquesPorDia[$i] : "0";
+        $query .= ($i < 7) ? ", " : ")";
+    }
+
+    // Ejecutar el query
+    $this->db->query($query);
+  }
+    */
+
+  // Función para obtener la configuración de bloques ya guardada para un usuario
+  public function obtenerRutinaConBloques($id_usuario) {
+      $query = "SELECT * FROM rutinasuser WHERE id_usuario = '$id_usuario' ORDER BY created_at DESC LIMIT 1";
+      $result = $this->db->query($query);
+      return $result->fetch_assoc();
+  }
+
+
+
+// *************************************************************************************************************
+  public function guardarRutinaConBloques($id_usuario, $nombre_rutina, $tipo_rutina, $dias_d, $duracion) {
+    $bloquesPorDia = $this->generarBloquesPorDia($dias_d);
+    
+    $query = "INSERT INTO rutinasuser (id_usuario, nombre_rutina, tipo_rutina, dias_d, duracion, dia1, dia2, dia3, dia4, dia5, dia6, dia7) VALUES ('$id_usuario', '$nombre_rutina', '$tipo_rutina', '$dias_d', '$duracion', '{$bloquesPorDia['dia1']}', '{$bloquesPorDia['dia2']}', '{$bloquesPorDia['dia3']}', '{$bloquesPorDia['dia4']}', '{$bloquesPorDia['dia5']}', '{$bloquesPorDia['dia6']}', '{$bloquesPorDia['dia7']}')";
+    
+    return $this->db->query($query);
+  }
+
+  public function getRutinaConBloques($id_usuario) {
+      $query = "SELECT * FROM rutinasuser WHERE id_usuario = '$id_usuario' ORDER BY id_rutina DESC LIMIT 1";
+      $result = $this->db->query($query);
+      
+      return $result->fetch_assoc();
+  }
+
+  public function generarBloquesPorDia($dias_d) {
+      $bloquesPorDia = [];
+      for ($i = 1; $i <= $dias_d; $i++) {
+          $bloquesPorDia["dia$i"] = rand(3, 4); // Generar aleatoriamente 3 o 4 bloques
+      }
+      return $bloquesPorDia;
+  }
+
+
+
+  // *************************************************************************************************************
+/*
+
+  // Método para obtener ejercicios aleatorios por tipo
+  public function obtenerEjerciciosAleatorios($tipo_rutina, $cantidad) {
+    $query = $this->db->prepare("SELECT id_ejercicio FROM rutinas WHERE tipo_rutina = ? ORDER BY RAND() LIMIT ?");
+    $query->bind_param("si", $tipo_rutina, $cantidad);
+    $query->execute();
+    $result = $query->get_result();
+    $ejercicios = [];
+    while ($row = $result->fetch_assoc()) {
+        $ejercicios[] = $row['id_ejercicio'];
+    }
+    return $ejercicios;
+  }
+
+  // Método para guardar la rutina generada con ejercicios por día
+  public function guardarRutinaConEjercicios($usuarioId, $tipo_rutina, $dias_d) {
+      for ($dia = 1; $dia <= $dias_d; $dia++) {
+          $cantidadEjercicios = rand(3, 4);
+          $ejercicios = $this->obtenerEjerciciosAleatorios($tipo_rutina, $cantidadEjercicios);
+
+          // Convertir el array de ejercicios a una cadena JSON para almacenar en la base de datos
+          $ejerciciosJson = json_encode($ejercicios);
+
+          $query = $this->db->prepare("UPDATE rutinasuser SET dia$dia = ? WHERE id_usuario = ?");
+          $query->bind_param("si", $ejerciciosJson, $usuarioId);
+          $query->execute();
+      }
+  }
+
+
+  
+  */
+  public function obtenerEjerciciosAleatorios($tipo_rutina, $cantidad) {
+    $query = $this->db->prepare("SELECT id_ejercicio FROM rutinas WHERE tipo_rutina = ? ORDER BY RAND() LIMIT ?");
+    $query->bind_param("si", $tipo_rutina, $cantidad);
+    $query->execute();
+    $result = $query->get_result();
+    $ejercicios = [];
+    while ($row = $result->fetch_assoc()) {
+        $ejercicios[] = $row['id_ejercicio'];
+    }
+    return $ejercicios;
+  }
+
+  // Método para guardar la rutina generada con ejercicios por día
+  public function guardarRutinaConEjercicios($id_usuario, $tipo_rutina, $dias_d) {
+    for ($dia = 1; $dia <= $dias_d; $dia++) {
+        $cantidadEjercicios = rand(3, 4);
+        $ejercicios = $this->obtenerEjerciciosAleatorios($tipo_rutina, $cantidadEjercicios);
+
+        // Convertir el array de ejercicios a una cadena JSON para almacenar en la base de datos
+        $ejerciciosJson = json_encode($ejercicios);
+
+        $query = $this->db->prepare("UPDATE rutinasuser SET dia$dia = ? WHERE id_usuario = '$id_usuario'");
+        $query->bind_param("s", $ejerciciosJson);
+        $query->execute();
+    }
+
+    return true;
+  }
+ 
+  // *************************************************************************************************************
+
+
+  public function recomendarRutinaPRUEBA_UNO($tipo_rutina ,$dias_d){
+    $tipo_rutina = $_SESSION['tipo_rutina'];
+    //$consultaEjercicios = "SELECT * FROM rutinas WHERE tipo_rutina = '{$_SESSION['tipo_rutina']}' ORDER BY RAND()";
+    $query = $this->db->query("SELECT * FROM rutinas WHERE tipo_rutina = '$tipo_rutina' ORDER BY RAND()");
+    if ($query) { // Verificacion y sorteador de ejercicios
+      
+      // Verificar proceso, sino ejecutar en Rutinas.php
+      $ejerciciosRecomendados = array();
+      while ($filaEjercicio = mysqli_fetch_assoc($query)) {
+        $ejerciciosRecomendados[] = $filaEjercicio;
+      }
+
+      // Barajar los ejercicios para asignar aleatoriamente
+      shuffle($ejerciciosRecomendados);
+
+      // Retorna solo los ejercicios correspondientes al día actual sin repetir
+      $rutinaDia = array_slice($ejerciciosRecomendados, 0, min(count($ejerciciosRecomendados), 4));
+
+      // Almacenar la rutina del dia en algun lado XD
+
+
+      return $rutinaDia;      
+    }
+
+    
+
+    // Array para almacenar los ID de los ejercicios por día
+    $diasSemana = ['dia1', 'dia2', 'dia3', 'dia4', 'dia5', 'dia6', 'dia7']; // Días de la semana en la tabla
+    $userRutinaDia = [];   
+    /*
+    for ($dia = 1; $dia <= 7; $dia++) {
+        $ejercicios = $this->obtenerEjerciciosAleatorios($_SESSION['tipo_rutina'], rand(3, 4));
+        $userRutinaDia[$diasSemana[$dia - 1]] = $ejercicios;
+    }*/
+    //$rutinaDia = json_encode($rutinaDia); // Convertir a JSON
+
+    // Generar un ID único para la rutina
+    $this->id_dia = generarId();
+    $existe = $this->getRutina($this->id_dia);
+    while($existe != null){
+      $this->id_dia = generarId();
+      $existe = $this->getRutina($this->id_dia);
+    }
+
+    $userRutinaDia[$diasSemana[0]] = $this->id_dia;
+    /*for ($i = 0; $i < count($dias_d); $i++) {
+      $id_ejercicio = $rutinaDia[$i]['id_ejercicio'];
+      $nombre_ejercicio = $rutinaDia[$i]['nombre_ejercicio'];
+      $descripcion = $rutinaDia[$i]['descripcion'];
+      $imagen_url = $rutinaDia[$i]['imagen_url'];
+      $query = $this->db->query("INSERT INTO rutinas (id_dia, id_ejercicio, nombre_ejercicio, descripcion, imagen_url) VALUES ('$id_diaUNO', '$id_ejercicio', '$nombre_ejercicio', '$descripcion', '$imagen_url')");
+    }
+    for ($i = 0; $i < $dias_d; $i++) {
+      $query = $this->db->query("INSERT INTO rutinasuser ($diasSemana) VALUES ('$id_diaUNO')");
+      $id_diaUNO = +1;
+    }*/
+    for ($i = 1; $i < $dias_d; $i++) {
+      $this->id_dia += 1; // Incrementar el ID para ser consecutivo
+      $userRutinaDia[$diasSemana[$i]] = $this->id_dia;
+    }
+
+    // Construir la consulta SQL con las columnas y valores
+    $columns = implode(", ", array_slice($diasSemana, 0, $dias_d));
+    $values = implode(", ", array_map(function($id) {
+        return "'$id'";
+    }, array_values($userRutinaDia)));
+
+    $query = $this->db->query("INSERT INTO rutinasuser ($columns) VALUES ($values)");
+    //$query = "INSERT INTO rutinasuser ($columns) VALUES ($values)";
+    if ($query) {
+    //if ($this->db->query($query)) {
+        echo "<p>Rutina guardada correctamente.</p>";
+    } else {
+        echo "Error al guardar la rutina: " . $this->db->error;
+    }
+
+  }
+
+
+
+
+
+
+
+
+
+  public function seleccionarEjerciciosAleatorios($tipo_rutina, $cantidad) {
+    $tipo_rutina = $_SESSION['tipo_rutina'];
+
+    $stmt =  $this->db->prepare("SELECT id_ejercicio FROM rutinas WHERE tipo_rutina = $tipo_rutina ORDER BY RAND() LIMIT ?");
+    $stmt->bind_param("i", $cantidad);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $ejercicios = [];
+    while ($row = $result->fetch_assoc()) {
+        $ejercicios[] = $row['id_ejercicio'];
+    }
+    return $ejercicios;
+  }
+/*
+  public function crearRutinaUsuario($usuarioId, $tipo_rutina, $dias_d) {
+    
+    // Array para almacenar los ID de los ejercicios por día
+    $dias = ['dia1', 'dia2', 'dia3', 'dia4', 'dia5', 'dia6', 'dia7'];
+
+    // Preparar la consulta para actualizar la tabla rutinasuser
+    $sql = "UPDATE rutinasuser SET ";
+    for ($i = 0; $i < $dias_d; $i++) {
+        $cantidadEjercicios = rand(3, 4); // Seleccionar entre 3 y 4 ejercicios
+        $ejerciciosSeleccionados = seleccionarEjerciciosAleatorios($tipo_rutina, $cantidadEjercicios);
+
+        // Convertir el array de ejercicios en una cadena de texto
+        $ejerciciosStr = implode(',', $ejerciciosSeleccionados);
+        $sql .= "{$dias[$i]} = '{$ejerciciosStr}'";
+
+        if ($i < $dias_d - 1) {
+            $sql .= ", ";
+        }
+    }
+
+    $sql .= " WHERE id_usuario = ?";
+    $stmt = $dbConnection->prepare($sql);
+    $stmt->bind_param("i", $usuarioId);
+    $stmt->execute();
+  }*/
+
+
+
+
+
+
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ?>

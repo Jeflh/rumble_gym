@@ -44,7 +44,7 @@ $usuario = $_SESSION['usuario'];
                 <label for="tipo_rutina" class="form-label">Tipo de Rutina</label>
                 <select class="form-select" id="tipo_rutina" name="tipo_rutina">
                   <option>Cardio</option>
-                  <option>Fuerza y Resistencia</option>
+                  <option>Fuerza</option>
                   <option>Flexibilidad</option>
                 </select>
               </div>

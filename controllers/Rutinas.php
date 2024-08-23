@@ -72,7 +72,7 @@ class RutinasController{
           $id_rutina = $rutinas['id_rutina'];
           //$rutinaDelDia = $this->rutinaModel->recomendarRutinaPRUEBA_UNO('Cardio', 4);
           
-          $this->rutinaModel->recomendarRutinaPRUEBA_UNO($tipo_rutina, $dias_d);
+          $this->rutinaModel->recomendarRutinaPRUEBA_UNO($tipo_rutina, $dias_d, $id_rutina);
           header('Location: index.php?c=rutinas&a=insertar&e=0');
           //require_once('views/prueba/V_inicioPrueba.php');   
         }
@@ -101,12 +101,7 @@ class RutinasController{
         $id_rutina = $rutinas['id_rutina'];
           //$rutinaDelDia = $this->rutinaModel->recomendarRutinaPRUEBA_UNO('Cardio', 4);
           
-        $this->rutinaModel->recomendarRutinaPRUEBA_UNO($tipo_rutina, $dias_d);
-
-
-        
-        //$this->rutinaModel->guardarRutinaConEjercicios($id_usuario, $tipo_rutina, $dias_d);
-        
+        $this->rutinaModel->recomendarRutinaPRUEBA_UNO($tipo_rutina, $dias_d, $id_rutina);
        
       }
       else{
@@ -121,19 +116,78 @@ class RutinasController{
 
   
 
-
-  public function imprimirRutina($dias_d, $bloquesPorDia, $rutinas, $usuario) {
+  
+  
+  // V2 imprimirRutina
+  public function imprimirRutinaVDOS($dias_d, $diasPrueba, $usuario) {
+    $rutinas = $this->rutinaModel->getUltimoDato($usuario['id_usuario']);
+    $id_usuario = $usuario['id_usuario'];
+    $id_rutina = $rutinas['id_rutina'];
+    $diasPrueba = $this->rutinaModel->obtenerDiasPRUEBA_UNO($id_usuario, $id_rutina);
+    
     for ($dia = 1; $dia <= $dias_d; $dia++) {
         echo "<h4 class=\"mt-5\"><strong>Día $dia</strong></h4>";
-        $this->imprimirBloque($dia, $rutinas, $usuario);
-        
-        /*$numBloques = $bloquesPorDia["dia$dia"];
-        for ($bloque = 1; $bloque <= $numBloques; $bloque++) {
-            //$this->imprimirBloque($dia, $rutinas, $usuario, $bloque);
-        }*/
+        // Convertir $dia a 'dia1', 'dia2', etc.
+        $diaKey = 'dia' . $dia;
+        // Verificar si existe el día en $diasPrueba
+        if (isset($diasPrueba[$diaKey])) {
+            $this->imprimirBloqueVDOS($diasPrueba[$diaKey], $usuario);
+        } else {
+            echo "<p>No hay ejercicios disponibles para el día$dia</p>";
+        }
     }
   }
-  
+
+  // V2 imprimirBloque
+  public function imprimirBloqueVDOS($ejer, $usuario) {
+    foreach ($ejer as $i => $ejercicio) {
+        $infoEjercicios = $this->rutinaModel->getIdEjercicio($ejercicio);
+        $id_ejercicio = $infoEjercicios['id_ejercicio'];
+        $nombre_ejercicio = $infoEjercicios['nombre_ejercicio'];
+        $descripcion_ejercicio = $infoEjercicios['descripcion'];
+        $img_ejercicio = $infoEjercicios['imagen_url'];
+        echo "<div class=\"d-flex justify-content-center mt-4\">";
+        // Bloque del ejercicio
+        echo "<div class=\"col card text-white bg-dark me-2\" style=\"max-width: 30rem; text-align: center;\">";
+        echo "<div class=\"card-header\">";
+        echo "<h4>Ejercicio " . ($i + 1) . "</h4>";
+        echo "</div>";
+        echo "<div class=\"card-body\">";
+        echo "Ejercicio $ejercicio";
+        if ($id_ejercicio == $ejercicio) {
+          echo "</br>";
+          echo "<img src=\"" . $img_ejercicio . "\" alt=\"Imagen del ejercicio\" style=\"width:100%; height:auto;\">";
+          //echo $img_ejercicio;
+        }
+        else{
+            echo "<p>No se encontró el ejercicio</p>";
+        }
+        
+        echo "</div>";
+        echo "</div>";
+        // Bloque de descripción
+        echo "<div class=\"col card text-white bg-dark me-2\" style=\"max-width: 90rem; text-align: center;\">";
+        echo "<div class=\"card-header\">";
+        echo "<h4>Descripción</h4>";
+        echo "</div>";
+        echo "<div class=\"card-body\">";
+        echo "<div class=\"card-text\">";
+        echo "<strong>Nombre: </strong>{$nombre_ejercicio}</br>";
+        echo "<strong>Descripción: </strong>{$descripcion_ejercicio}";
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
+        echo "</div>"; // Cerrar el contenedor del bloque
+    }
+  }
+
+
+
+
+
+
+/*
+  // V1
   public function imprimirBloque($dia, $rutinas, $usuario) {
     echo "<div class=\"d-flex justify-content-center mt-4\">";
     echo "<div class=\"col card text-white bg-dark me-2\" style=\"max-width: 30rem; text-align: center;\">";
@@ -159,50 +213,25 @@ class RutinasController{
     echo "</div>";
     echo "</div>";
   }
-   /*
-  # ESTO FUE CREADO POR COPILOT
-  public function crear(){
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $id = $_POST['id'];
-      $tipo = $_POST['tipo'];
-      $dias = $_POST['dias'];
-      $duracion = $_POST['duracion'];
-      $sql = "INSERT INTO rutinas (id_usuario, tipo, dias, duracion) VALUES ('$id', '$tipo', '$dias', '$duracion')";
-      $this->db->query($sql);
-      //header("Location: index.php?c=panel");
+    // V1
+  public function imprimirRutina($dias_d, $rutinas, $usuario) {
+    for ($dia = 1; $dia <= $dias_d; $dia++) {
+        echo "<h4 class=\"mt-5\"><strong>Día $dia</strong></h4>";
+        $this->imprimirBloque($dia, $rutinas, $usuario);
+        
+        /*$numBloques = $bloquesPorDia["dia$dia"];
+        for ($bloque = 1; $bloque <= $numBloques; $bloque++) {
+            //$this->imprimirBloque($dia, $rutinas, $usuario, $bloque);
+        }
+      }
     }
-  }
-  public function editar(){
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $id = $_POST['id'];
-      $sql = "SELECT * FROM rutinas WHERE id_usuario = '$id'";
-      $resultado = $this->db->query($sql);
-      $rutina = $resultado->fetch_assoc();
-      require_once('views/rutinas/V_editarRutinas.php');
-    }
-  }
-  public function actualizar(){
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $id = $_POST['id'];
-      $tipo = $_POST['tipo'];
-      $dias = $_POST['dias'];
-      $duracion = $_POST['duracion'];
-      $sql = "UPDATE rutinas SET tipo = '$tipo', dias = '$dias', duracion = '$duracion', WHERE id_usuario = '$id'";
-      $this->db->query($sql);
-      //header("Location: index.php?c=panel");
-    }
-  }
-  public function eliminar(){
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $id = $_POST['id'];
-      $sql = "DELETE FROM rutinas WHERE id_usuario = '$id'";
-      $this->db->query($sql);
-      //header("Location: index.php?c=panel");
-    }
-  }
+
+
+
+    */
+   
     
   
-  */
 
 
   

@@ -145,7 +145,7 @@ class UsuarioModel{
 
   public function renovarSuscripcion($id_usuario){
     $this->id_usuario = $id_usuario;
-    $usuario = $this->getUsuario($this->id_usuario);
+    $usuario = $this->getUsuario($this->id_usuario); // Consigue los datos del usuario
     $this->tipo_suscripcion = $usuario['tipo_suscripcion'];
     $this->fecha_inicio = date('Y-m-d');
     if($this->tipo_suscripcion == 1){

@@ -8,11 +8,8 @@ $usuario = $_SESSION['usuario'];
 <main>
   <div class="container">
     <h1 class="text-light text-center mt-2"><strong><?php echo $usuario['nombre'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_m'];?></strong></h1>
-    <!-- col-1  -->
-
   <?php
   if (isset($_GET['e'])) {
-
     $status = $_GET['e'];
     $arrayValues = str_split($status);
     // Se convierte el string en un array para poder evaluar cada caso.
@@ -27,13 +24,11 @@ $usuario = $_SESSION['usuario'];
       }
     }
   }
-
 ?>
     <div class="d-flex card bg-dark text-light mt-3">
         <div class="card-header text-center justify-content-center">
-          <h3 class="card-title">NUEVA RECOMENDACION DE RUTINA SEMANAL</h3>
+          <h3 class="card-title">NUEVA RECOMENDACION DE RUTINA SEMANAAL</h3>
         </div>
-        
         <div class="card-body">
           <form class="mt-2" action="index.php?c=rutinas&a=insertar"  method="POST"> 
               <fieldset>
@@ -53,9 +48,6 @@ $usuario = $_SESSION['usuario'];
                   <option>3- Flexibilidad</option>
                 </select>
               </div>
-
-
-
 
               <!-- Campo 3 -->
               <div class="form-group">

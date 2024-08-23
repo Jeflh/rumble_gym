@@ -13,29 +13,22 @@ $rutinas = $_SESSION['rutina'];
     ?>
 
     <?php     
-    if($rutina['tipo_rutina'] == 'Fuerza'  || $_GET['tipo_rutina'] == 'Fuerza') {
-      echo 'Fuerza';
-    }
-    else if($rutina['tipo_rutina'] == 'Cardio'|| $_GET['tipo_rutina'] == 'Cardio'){
-      echo 'Cardio';
-    }
-    else if($rutina['tipo_rutina'] == 'Flexibilidad'|| $_GET['tipo_rutina'] == 'Flexibilidad'){
-      echo 'Flexibilidad';
-    }
+    
     ?>
     </h2>
       <!-- FUNCION obtenerDia  -->
-      <h4> <?php echo "<strong>" . obtenerNombreDia($diaSeleccionado) . "</strong>"; ?>  </h4>
+       
+      <h4> <?//php echo "<strong>" . obtenerNombreDia($diaSeleccionado) . "</strong>"; ?>  </h4>
       <?php 
       
       $dias_d = $_SESSION['dias_d'];
       $diaSeleccionado = isset($_GET['dias']); // 1 para Dia 1, 2 para Dia 2, ..., 7 para Dia 7
-      $detalleEjercicio = recomendarRutinaPorDia($diaSeleccionado);
+      //$detalleEjercicio = recomendarRutinaPorDia($diaSeleccionado);
       $id_usuario = $usuario['id_usuario'];
       $query = $this->db->query("SELECT dias_d FROM rutinasuser WHERE id_usuario = '$id_usuario' AND dias_d = '$dias_d'");
       if($query){
         for ($i = 1; $i <= $dias_d; $i++) {
-          echo "<li><a href='?dia=$i'>" . obtenerNombreDia($i) . "</a></li>";
+         //echo "<li><a href='?dia=$i'>" . obtenerNombreDia($i) . "</a></li>";
         }
       }
 

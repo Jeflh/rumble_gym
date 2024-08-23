@@ -26,10 +26,6 @@ class PruebaController{
   }
 
 
-  
-  
-
-
   /* Visualización Panel de Nuevas Rutinas*/
   public function index(){
 
@@ -46,7 +42,7 @@ class PruebaController{
       foreach($pruebas as $prueba){*/
     $usuario = $_SESSION['usuario'];
     $prueba = $this->pruebaModel->verRutinas($usuario['id_usuario']);
-    if($usuario['id_usuario'] == $prueba['id_usuario']){
+    if($_SESSION['usuario'] == true){
       $prueba = $this->pruebaModel->getData($prueba['id_usuario']);
       require_once('views/usuario/V_inicioPrueba.php');
     }
@@ -62,12 +58,8 @@ class PruebaController{
   }
 
 
-
-
-
-
-  # PRUEBA 
-  public function insertar(){ // Función para insertar una rutina
+  /*
+  public function a(){ // Función para insertar una rutina
     //if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if(isset($_POST)){
         $usuarios = $this->usuarioModel->getAll();
@@ -76,23 +68,9 @@ class PruebaController{
         foreach($usuarios as $usuario){//por cada uno de estos hacer un foreach
           $userRutinas = $this->pruebaModel->getRutinasUser($usuario['id_usuario']);
         }
-
         foreach($usuarios as $usuario){
           foreach($userRutinas as $userRutina){
             if($usuario['id_usuario'] == $userRutina['id_usuario']){
-    
-              /*if($userRutina['estado'] == '1'){
-                $sumaAsistencia++;
-              }*/
-
-              /*$datosRutinas = array(
-                'id_usuario' => $usuario['id_usuario'],
-                'nombre' => $_POST['nombre_rutina'],
-                'tipo' => $_POST['tipo'],
-                'dias' => $_POST['dias'],
-                'duracion' => $_POST['duracion']
-              );*/
-      
               $insertar = $this->pruebaModel->insertRutina($userRutina);
               if($insertar){
                 echo "Rutina insertada correctamente :D";
@@ -103,63 +81,48 @@ class PruebaController{
                 echo "Error al insertar la rutina a la base de datos";
               }
             }
-          }
-
-          
         }
-  
       }
-      
-      
-    //}
-    
-  }
-
-
-   /*
-  # ESTO FUE CREADO POR COPILOT
-  public function crear(){
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $id = $_POST['id'];
-      $tipo = $_POST['tipo'];
-      $dias = $_POST['dias'];
-      $duracion = $_POST['duracion'];
-      $sql = "INSERT INTO rutinas (id_usuario, tipo, dias, duracion) VALUES ('$id', '$tipo', '$dias', '$duracion')";
-      $this->db->query($sql);
-      //header("Location: index.php?c=panel");
-    }
-  }
-  public function editar(){
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $id = $_POST['id'];
-      $sql = "SELECT * FROM rutinas WHERE id_usuario = '$id'";
-      $resultado = $this->db->query($sql);
-      $rutina = $resultado->fetch_assoc();
-      require_once('views/rutinas/V_editarRutinas.php');
-    }
-  }
-  public function actualizar(){
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $id = $_POST['id'];
-      $tipo = $_POST['tipo'];
-      $dias = $_POST['dias'];
-      $duracion = $_POST['duracion'];
-      $sql = "UPDATE rutinas SET tipo = '$tipo', dias = '$dias', duracion = '$duracion', WHERE id_usuario = '$id'";
-      $this->db->query($sql);
-      //header("Location: index.php?c=panel");
-    }
-  }
-  public function eliminar(){
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $id = $_POST['id'];
-      $sql = "DELETE FROM rutinas WHERE id_usuario = '$id'";
-      $this->db->query($sql);
-      //header("Location: index.php?c=panel");
-    }
-  }
-    
+  }*/
   
-  */
+  public function insertar(){ // Función para insertar una rutina
+    if(isset($_POST)){
+      $usuarios = $this->usuarioModel->getAll();
+      //$userRutinas = $this->rutinaModel->getRutinasUser($usuario['id_usuario']);
+      //$usuarios = $this->usuarioModel->getAll();
+      $pruebas = $this->pruebaModel->insertRutinaUserID();
+  
+      $usuario = $_SESSION['usuario'];
+      $prueba = $this->pruebaModel->verRutinas($usuario['id_usuario']);
+      if($_SESSION['usuario'] == true){
+        $prueba = $this->pruebaModel->getData($usuario['id_usuario']);  // SOLO SE INSERTA UNA SOLA VEZ
+        if ($prueba){
+          
+          echo "Rutina insertada correctamente :D";
+          require_once('views/prueba/V_inicioPrueba.php');
+        }
+        else{
+          echo "Error al insertar la rutina a la base de datos";
+        }
+        
+      }
+      else{
+        echo "Error al cargar la vista";
+      }
+          
+    }
+        /*$lista [] = array(
+          'id_usuario' => $usuario['id_usuario'],
+          'nombreRutina' => $userRutinas['nombre_rutina'],
+          'tipoRutina' => $userRutinas['tipo_rutina'],
+          'dias_d' => $userRutinas['dias_d'],
+          'duracion' => $userRutinas['duracion']
+        );*/
+
+}
+
+
+
 
 
 }

@@ -14,25 +14,25 @@ require_once 'includes/navAdmin.php';
       for ($i = 0; $i < count($arrayValues); $i++) {
         switch ($arrayValues[$i]) { // Se evalua cada caso y muestra la alerata correspondiente
           case "1":
-            echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+            echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Código vacío</strong>, por favor introduce tu código.
           </div>';
             break;
           case "2":
-            echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+            echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Contraseña vacía</strong>, por favor introduce tu contraseña.
           </div>';
             break;
           case "3":
-            echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+            echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Código no válido</strong>, revisa que tu código sea correcto.
           </div>';
             break;
           case "4":
-            echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+            echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Contraseña incorrecta</strong>, vuelve a escribir tu contraseña.
           </div>';

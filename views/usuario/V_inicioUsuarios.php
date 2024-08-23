@@ -59,13 +59,13 @@ require_once 'includes/navLogueado.php';
           </div>';
             break;
           case "5":
-            echo '<div class="text-center alert alert-dismissible alert-danger mb-2">
+            echo '<div class="text-center alert alert-dismissible alert-warning mb-2">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Código no válido</strong>, debes introducir un código numérico de 5 digitos.
           </div>';
             break;
           case "6":
-            echo '<div class="text-center alert alert-dismissible alert-danger mb-2">
+            echo '<div class="text-center alert alert-dismissible alert-warning mb-2">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Usuario no encontrado</strong>, no se encontraron coincidencias con la busqueda.
           </div>';

@@ -7,17 +7,17 @@ $usuario = $_SESSION['usuario'];
 
 <main>
   <div class="container">
-    <h1 class="text-light text-center mt-2"><strong><?php echo $usuario['nombre'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_m'];?></strong></h1>
+    <h1 class="text-light text-center mt-2"><strong><?php echo $usuario['nombre'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_m']; ?></strong></h1>
 
     <div class="d-flex justify-content-center">
       <form action="index.php?c=asistencia&a=guardar" method="POST">
-        <input type="hidden" id="id" name="id" value="<?php echo $usuario['id_usuario'];?>">
-        <input type="hidden" id="fecha" name="fecha" value="<?php echo date('Y-m-d');?>">
+        <input type="hidden" id="id" name="id" value="<?php echo $usuario['id_usuario']; ?>">
+        <input type="hidden" id="fecha" name="fecha" value="<?php echo date('Y-m-d'); ?>">
         <button type="submit" class="btn btn-info">Confirmar asistencia</button>
       </form>
     </div>
 
-<!-- Bloque 1 -->
+    <!-- Bloque 1 -->
     <div class="d-flex justify-content-center text-center">
       <div class="col-3 card bg-dark text-light mt-3 me-3">
         <div class="card-header">
@@ -29,8 +29,25 @@ $usuario = $_SESSION['usuario'];
           <p class="card-text"><strong>IMC: </strong><?php echo $usuario['imc']; ?></p>
         </div>
       </div>
+      <!-- Bloque 4 -->
+      <div class="col-2 card bg-dark text-light mt-3 me-3 text-center justify-content-center">
+        <div class="card-header">
+          <h3 class="card-title">Rutinas</h3>
+        </div>
 
-<!-- Bloque 2 -->
+        <div class="card-body">
+          <!-- NUEVA RUTINA -->
+          <div class="d-flex justify-content-center">
+            <a href="index.php?c=rutina&a=crear" class="btn btn-light">Crear rutina</a>
+          </div>
+
+          <!-- CONSULTAR RUTINAS -->
+          <div class="d-flex justify-content-center mt-4">
+            <a href="index.php?c=rutina" class="btn btn-light">Ver mis rutinas</a>
+          </div>
+        </div>
+      </div>
+      <!-- Bloque 2 -->
       <div class="col-3 card bg-dark text-light mt-3">
         <div class="card-header">
           <h3 class="card-title text-center">Suscripción
@@ -67,10 +84,9 @@ $usuario = $_SESSION['usuario'];
       </div>
     </div>
 
-
     <!-- Bloque 3 -->
     <div class="d-flex justify-content-center">
-      <div class="col-4 card bg-dark text-light mt-3 me-3 ">
+      <div class="col-4 card bg-dark text-light mt-3 me-3 mb-3">
         <div class="card-header">
           <h3 class="card-title text-center">Datos personales</h3>
         </div>
@@ -97,43 +113,7 @@ $usuario = $_SESSION['usuario'];
           <p class="card-text"><strong>Miembro desde: </strong> <?php echo date("d-m-Y", strtotime($usuario['inscrito'])); ?></p> <!-- Fecha de inscripción -->
         </div>
       </div>
-    <!--</div>-->
-
-    <!-- Bloque 4 -->
-<!-- Prueba -->
-            <!-- mb-5 -->
-      <div class="col-4 card bg-dark text-light mt-3 text-center justify-content-center">
-        <div class="card-header">
-          <h3 class="card-title">Recomendación de Rutinas</h3>
-        </div>
-        
-        <div class="card-body mt-4">
-          <!-- NUEVA RUTINA -->
-          <p class="card-text">Presiona para generar una rutina</p>
-
-          <div class="d-flex justify-content-center">
-            <form action="index.php?c=rutinas" method="POST">
-              <input type="hidden" id="id" name="id" value="<?php echo $usuario['id_usuario'];?>">
-              <button type="submit" class="btn btn-light">Crear Nueva Rutina</button>
-            </form>
-            <!-- <a href="index.php?c=rutinas" class="btn btn-light">Probar</a> -->
-          </div>
-
-          <!-- CONSULTAR RUTINAS -->
-          <p class="card-text mt-4">Presiona para consultar tus rutinas</p>
-          <div class="d-flex justify-content-center">
-            <form action="index.php?c=rutinas" method="POST">
-              <input type="hidden" id="id" name="id" value="<?php echo $usuario['id_usuario'];?>">
-              <button type="submit" class="btn btn-light">Ver Mis Rutinas</button>
-            </form>
-            <!-- <a href="index.php?c=rutinas" class="btn btn-light">Probar</a> -->
-          </div>
-        </div>
-        
-      </div>
     </div>
-            
-    
   </div>
 </main>
 

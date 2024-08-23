@@ -25,61 +25,61 @@ require_once 'includes/navLogueado.php';
     for ($i = 0; $i < count($arrayValues); $i++) {
       switch ($arrayValues[$i]) { // Se evalua cada caso y muestra la alerata correspondiente
         case "0":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Nombre no válido</strong>, por favor introduce un nombre válido.
           </div>';
           break;
         case "1":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Apellido paterno no válido</strong>, por favor introduce un apellido paterno válido.
           </div>';
           break;
         case "2":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Apellido materno no válido</strong>, por favor introduce un apellido materno válido.
           </div>';
           break;
         case "3":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Sexo vacío</strong>, por favor elije una opción.
           </div>';
           break;
         case "4":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Fecha de nacimiento vácia</strong>, por favor seleccione una fecha de nacimiento.
           </div>';
           break;
         case "5":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Peso vacío</strong>, por favor introduce un peso válido.
           </div>';
           break;
         case "6":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Altura vacía</strong>, por favor introduce una altura válida.
           </div>';
           break;
         case "7":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Domicilio vacío</strong>, por favor introduce un domicilio válido.
           </div>';
           break;
         case "8":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Teléfono no válido</strong>, el télefono debe ser de 10 digitos.
           </div>';
           break;
         case "9":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Tipo de suscripción vacío</strong>, por favor elije una opción.
           </div>';
@@ -142,7 +142,10 @@ require_once 'includes/navLogueado.php';
               <option <?php if($usuario['tipo_suscripcion'] == '4') echo 'selected';?> >4- Anual - $2880</option>
             </select>
           </div>
+          <!-- Se envia el id del usuario para poder actualizarlo -->
           <input type="hidden" id="id_usuario" name="id_usuario" value="<?php echo $usuario['id_usuario'];?>">
+          <?php $usuarioRutina =  $usuario['id_usuario']?>
+          <input type="hidden" id="id_usuario" name="id_usuario" value="<?php $usuarioRutina;?>">
           <div class="d-flex justify-content-center mt-2 mb-3">
             <button type="submit" class="btn btn-primary mt-2">Actualizar usuario</button>
           </div>

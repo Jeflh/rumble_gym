@@ -24,25 +24,25 @@ require_once 'includes/navLogueado.php';
     for ($i = 0; $i < count($arrayValues); $i++) {
       switch ($arrayValues[$i]) { // Se evalua cada caso y muestra la alerata correspondiente
         case "1":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Nombre no válido</strong>, por favor introduce un nombre menor a 45 caracteres.
           </div>';
           break;
         case "2":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Cantidad vacía  </strong>, por favor introduce una cantidad.
           </div>';
           break;
         case "3":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Precio vacío</strong>, por favor introduce un precio.
           </div>';
           break;
         case "4":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Descripción no válida</strong>, por favor introduce una descripción de maximo 200 caracteres.
           </div>';

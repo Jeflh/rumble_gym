@@ -20,19 +20,19 @@ require_once 'includes/navUsuario.php';
           </div>';
             break;
           case "1":
-            echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+            echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Código vacío</strong>, por favor introduce tu código.
           </div>';
             break;
           case "2":
-            echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+            echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Fecha de nacimiento vacía</strong>, por favor introduce tu fecha de nacimiento.
           </div>';
             break;
           case "3":
-            echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+            echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Código o fecha de nacimiento incorrectos</strong>, por favor vuelte a intentarlo.
           </div>';

@@ -199,6 +199,19 @@ CREATE TABLE `productos` (
   `precio` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- NUEVA TABLA DE RUTINAS
+-- Estructura de tabla para la tabla `productos`
+--
+CREATE TABLE `rutinas` (
+    `id_ejercicio` int(11) PRIMARY KEY,
+    `tipo_rutina` varchar(45) NOT NULL,
+    `dificultad` VARCHAR(45) NOT NULL,
+    `nombre_ejercicio` VARCHAR(100) NOT NULL,
+    `descripcion` VARCHAR(255) NOT NULL,
+    `imagen_url` VARCHAR(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 --
 -- Volcado de datos para la tabla `productos`
 --

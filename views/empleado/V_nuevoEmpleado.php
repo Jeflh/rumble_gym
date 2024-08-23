@@ -25,49 +25,49 @@ require_once 'includes/navLogueado.php';
     for ($i = 0; $i < count($arrayValues); $i++) {
       switch ($arrayValues[$i]) { // Se evalua cada caso y muestra la alerata correspondiente
         case "1":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Nombre no válido</strong>, por favor introduce un nombre válido.
           </div>';
           break;
         case "2":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Apellido paterno no válido</strong>, por favor introduce un apellido paterno valido.
           </div>';
           break;
         case "3":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Apellido materno no válido</strong>, por favor introduce un apellido materno valido.
           </div>';
           break;
         case "4":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Fecha no válida</strong>, la fecha no puede estar vacia.
           </div>';
           break;
         case "5":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Domicilio no válido</strong>, por favor introduce una domicilio valido.
           </div>';
           break;
         case "6":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Teléfono no válido</strong>, por favor introduce un Teléfono valido.
           </div>';
           break;
         case "7":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Tipo de empleado no válido</strong>, por favor seleccione una opción.
           </div>';
           break;
         case "8":
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-1">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-1">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Contraseña no válida</strong>, la contraseña no puede estar vacia.
           </div>';

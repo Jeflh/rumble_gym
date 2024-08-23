@@ -31,7 +31,7 @@ require_once 'includes/navLogueado.php';
 
     if (isset($_POST['monto'])) {
       if ($_POST['monto'] < $_POST['suma'] || $_POST['monto'] == '') {
-        echo '<div class="text-center alert alert-dismissible alert-danger mb-2">
+        echo '<div class="text-center alert alert-dismissible alert-warning mb-2">
         <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
         <strong>Monto insuficiente</strong>, el monto ingresado es menor al total de la venta.
         </div>';
@@ -77,25 +77,25 @@ require_once 'includes/navLogueado.php';
               $_SESSION['productos'][$i]['cantidad'] -= 1;
               array_push($_SESSION['carrito'], $producto);
             } else {
-              echo '<div class="text-center alert alert-dismissible alert-danger mb-2">
+              echo '<div class="text-center alert alert-dismissible alert-warning mb-2">
               <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
               <strong>Producto sin existencias</strong>, el producto ya no se encuentra en inventario.
               </div>';
             }
           } else { // No existe el producto
-            echo '<div class="text-center alert alert-dismissible alert-danger mb-2">
+            echo '<div class="text-center alert alert-dismissible alert-warning mb-2">
             <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
             <strong>Producto no encontrado</strong>, el producto no se encuentra en inventario.
             </div>';
           }
         } else { // Codigo no valido
-          echo '<div class="text-center alert alert-dismissible alert-danger mb-2">
+          echo '<div class="text-center alert alert-dismissible alert-warning mb-2">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Código no válido</strong>, el código debe ser de 5 dígitos.
           </div>';
         }
       } else { // Si está vacío
-        echo '<div class="text-center alert alert-dismissible alert-danger mb-2">
+        echo '<div class="text-center alert alert-dismissible alert-warning mb-2">
           <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
           <strong>Código vacío</strong>, ingresa un código de producto válido.
           </div>';
@@ -116,6 +116,7 @@ require_once 'includes/navLogueado.php';
             </tr>
           </thead>
           <tbody>
+            <!-- Aquí se muestran los productos -->
             <?php foreach ($_SESSION['productos'] as $producto) : ?>
               <tr class="table-default">
                 <th scope="row"><?php echo $producto['id_producto']; ?></th>

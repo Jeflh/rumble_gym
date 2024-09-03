@@ -8,6 +8,22 @@ $usuario = $_SESSION['usuario'];
 <main>
   <div class="container">
     <h1 class="text-light text-center mt-2"><strong><?php echo $usuario['nombre'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_m']; ?></strong></h1>
+    <h1 class="text-light text-center mt-2"><strong><?php echo 'IMC: ' . $usuario['imc']; ?></strong></h1>
+    <?php
+    if ($usuario['imc'] < 18.5) {
+      echo '<h3 class="text-light text-center mt-2"><strong>Estado: Bajo Peso</strong></h3>';
+    } else if ($usuario['imc'] >= 18.5 && $usuario['imc'] < 24.9) {
+      echo '<h3 class="text-light text-center mt-2"><strong>Estado: Peso Normal</strong></h3>';
+    } else if ($usuario['imc'] >= 25 && $usuario['imc'] < 29.9) {
+      echo '<h3 class="text-light text-center mt-2"><strong>Estado: Sobrepeso</strong></h3>';
+    } else if ($usuario['imc'] >= 30 && $usuario['imc'] < 34.9) {
+      echo '<h3 class="text-light text-center mt-2"><strong>Estado: Obesidad Grado 1</strong></h3>';
+    } else if ($usuario['imc'] >= 35 && $usuario['imc'] < 39.9) {
+      echo '<h3 class="text-light text-center mt-2"><strong>Estado: Obesidad Grado 2</strong></h3>';
+    } else if ($usuario['imc'] >= 40) {
+      echo '<h3 class="text-light text-center mt-2"><strong>Estado: Obesidad Grado 3</strong></h3>';
+    }
+    ?>
 
     <div class="d-flex justify-content-between mb-3">
       <a href="index.php?c=panel" class="btn btn-info">
@@ -91,6 +107,17 @@ $usuario = $_SESSION['usuario'];
                 <option>Más de 60 Minutos</option>
               </select>
             </div>
+
+            <div class="form-group mt-3">
+              <label for="duracion" class="form-label">Equipamiento</label>
+              <select class="form-select" id="duracion" name="duracion">
+                <option>Sin Equipo (Peso Corporal)</option>
+                <option>Equipo Básico (Mancuernas, Bandas)</option>
+                <option>Gimnasio Completo</option>
+              </select>
+            </div>
+
+
 
             <div class="d-flex justify-content-center mt-3">
               <button type="submit" class="btn btn-success">Generar Rutina</button>

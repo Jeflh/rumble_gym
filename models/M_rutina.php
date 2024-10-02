@@ -70,6 +70,7 @@ class RutinaModel
     $ejercicios = [];
     $idsEjercicios = [];
 
+    // Recopilar todos los IDs de ejercicios de los días
     for ($i = 1; $i <= 7; $i++) {
       $dia = "dia" . $i;
       if (!empty($rutina[$dia])) {
@@ -78,12 +79,13 @@ class RutinaModel
       }
     }
 
+    // Eliminar duplicados
     $idsEjercicios = array_unique($idsEjercicios);
     $idsEjerciciosStr = implode(',', array_map('intval', $idsEjercicios));
 
     if (!empty($idsEjerciciosStr)) {
-      // Preparamos y ejecutamos la consulta usando mysqli
-      $query = "SELECT * FROM rutinas WHERE id_ejercicio IN ($idsEjerciciosStr)";
+      // Preparar y ejecutar la consulta para obtener ejercicios de la tabla de ejercicios
+      $query = "SELECT * FROM ejercicios WHERE id IN ($idsEjerciciosStr)";
       $resultado = $this->db->query($query);
 
       if ($resultado) {
@@ -91,18 +93,19 @@ class RutinaModel
         while ($ejercicio = $resultado->fetch_assoc()) {
           for ($i = 1; $i <= 7; $i++) {
             $dia = "dia" . $i;
-            if (!empty($rutina[$dia]) && in_array($ejercicio['id_ejercicio'], explode(',', $rutina[$dia]))) {
-              $ejercicios[$dia][] = $ejercicio;
+            if (!empty($rutina[$dia]) && in_array($ejercicio['id'], explode(',', $rutina[$dia]))) {
+              $ejercicios[$dia][] = $ejercicio; 
             }
           }
         }
       } else {
-        echo 'Error en la consulta: ' . $this->db->error;
+        echo 'Error en la consulta: ' . $this->db->error; 
       }
     }
 
-    return $ejercicios;
+    return $ejercicios; 
   }
+
 
   // Eliminar Rutina de la tabla rutinasuser
   public function deleteRutina($id_rutina)
@@ -136,69 +139,55 @@ class RutinaModel
     return $row;
   }
 
-
-  public function generarRutina($id_usuario, $nombre_rutina, $tipo_rutina, $dias, $duracion)
+  public function insertarRutina($usuario, $response)
   {
-    $this->id_usuario = mysqli_real_escape_string($this->db, $id_usuario);
-    $this->nombre_rutina = mysqli_real_escape_string($this->db, $nombre_rutina);
-    $this->tipo_rutina = mysqli_real_escape_string($this->db, $tipo_rutina); 
-    $this->dias = mysqli_real_escape_string($this->db,$dias); 
-    $this->duracion = mysqli_real_escape_string($this->db, $duracion);
-
+    // Suponiendo que $response es un array con los datos necesarios
+    $this->id_usuario = mysqli_real_escape_string($this->db, $usuario);
     $this->id_rutina = generarId();
+
+    // Verificar si el ID de rutina ya existe
     $existe = $this->getRutina($this->id_rutina);
     while ($existe != null) {
       $this->id_rutina = generarId();
       $existe = $this->getRutina($this->id_rutina);
     }
 
+    // Extraer información del microservicio
+    $this->nombre_rutina = mysqli_real_escape_string($this->db, $response['nombre_rutina']);
+    $this->tipo_rutina = mysqli_real_escape_string($this->db, $response['tipo_rutina']);
+    $this->dias = mysqli_real_escape_string($this->db, $response['dias']);
+    $this->duracion = mysqli_real_escape_string($this->db, $response['duracion']);
+
     // Insertar la rutina en la tabla rutinasuser
     $queryInsert = "INSERT INTO rutinasuser (id_usuario, id_rutina, nombre_rutina, tipo_rutina, dias_d, duracion_sesiones) 
-                        VALUES ('$this->id_usuario', '$this->id_rutina', '$this->nombre_rutina', '$this->tipo_rutina', '$this->dias', '$this->duracion')";
+                    VALUES ('$this->id_usuario', '$this->id_rutina', '$this->nombre_rutina', '$this->tipo_rutina', '$this->dias', '$this->duracion')";
+
     $insertResult = $this->db->query($queryInsert);
 
     if ($insertResult) {
-      // Obtener y asignar ejercicios aleatorios a los días de la rutina
-      $diasSemana = ['dia1', 'dia2', 'dia3', 'dia4', 'dia5', 'dia6', 'dia7'];
+      // Insertar los ejercicios para cada día de la rutina
+      $diasRutina = $response['rutina']; // Obtenemos el objeto 'rutina' del response
+
       $updatePairs = [];
 
-      for ($dia = 0; $dia < $dias; $dia++) {
-        $ejercicios = $this->obtenerEjerciciosAleatorios($this->tipo_rutina, rand(3, 5));
-        $userRutinaDia = implode(',', $ejercicios);
-        $updatePairs[] = "{$diasSemana[$dia]} = '$userRutinaDia'";
+      // Insertar ejercicios en las columnas correspondientes
+      for ($dia = 1; $dia <= $this->dias; $dia++) {
+        $diaKey = "dia" . $dia; // Crear la clave de columna (dia1, dia2, etc.)
+        if (isset($diasRutina[$diaKey])) { // Verificar si existe el día
+          $userRutinaDia = implode(',', array_map('intval', $diasRutina[$diaKey])); // Convertir a string y asegurarnos de que son enteros
+          $updatePairs[] = "$diaKey = '$userRutinaDia'"; // Construir pares para la actualización
+        }
       }
 
+      // Actualizar la tabla rutinasuser con los ejercicios para cada día
       $updateQuery = "UPDATE rutinasuser SET " . implode(", ", $updatePairs) . " WHERE id_rutina = '$this->id_rutina'";
-      $updateResult = $this->db->query($updateQuery);
+      $this->db->query($updateQuery);
 
-      if ($updateResult) {
-        header("Location: index.php?c=rutina&a=ver&id=" . $this->id_rutina . "&e=1");
-        return true; // Rutina y ejercicios insertados correctamente
-      } else {
-        header("Location: index.php?c=rutina&a=crear" . $this->id_rutina . "&e=3");
-        return false;
-      }
+      return $this->id_rutina;
     } else {
-      header("Location: index.php?c=rutina&a=crear" . $this->id_rutina . "&e=3");
+      // Manejar el error en caso de que la inserción falle
+      header("Location: index.php?c=rutina&a=crear&e=3");
       return false;
     }
   }
-
-
-  private function obtenerEjerciciosAleatorios($tipo_rutina, $cantidad)
-  {
-    $query = "SELECT id_ejercicio FROM rutinas WHERE tipo_rutina = '$tipo_rutina' ORDER BY RAND() LIMIT $cantidad";
-    $result = $this->db->query($query);
-
-    $ejercicios = [];
-    if ($result) {
-      while ($fila = $result->fetch_assoc()) {
-        $ejercicios[] = $fila['id_ejercicio'];
-      }
-    } else {
-      echo "Error en la consulta de ejercicios: " . $this->db->error;
-    }
-    return $ejercicios;
-  }
-
 }

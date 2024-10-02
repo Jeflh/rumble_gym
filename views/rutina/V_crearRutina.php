@@ -51,7 +51,7 @@ $usuario = $_SESSION['usuario'];
         <h3 class="card-title">Nueva recomendación de rutina</h3>
       </div>
       <div class="card-body">
-        <form class="mt-2" action="index.php?c=rutina&a=generar" method="POST">
+        <form id="rutinaForm" method="POST" action="index.php?c=rutina&a=generar">
           <fieldset>
             <!-- Campo 1 -->
             <div class="form-group mt-3">
@@ -88,20 +88,73 @@ $usuario = $_SESSION['usuario'];
                 <option>30 Minutos</option>
                 <option>45 Minutos</option>
                 <option>60 Minutos</option>
-                <option>Más de 60 Minutos</option>
+                <option>+60 Minutos</option>
+              </select>
+            </div>
+
+              <!-- Campo oculto de IMC -->
+            <input type="hidden" id="imc" name="imc" value="<?php echo $usuario['imc']; ?>">
+
+            <!-- Campo 5 para selección de equipo -->
+            <div class="form-group mt-3">
+              <label for="equipo" class="form-label">Equipo</label>
+              <select class="form-select" id="equipo" name="equipo">
+                <option>Sin equipo</option>
+                <option>Equipo básico</option>
+                <option>Gimnasio completo</option>
               </select>
             </div>
 
             <div class="d-flex justify-content-center mt-3">
               <button type="submit" class="btn btn-success">Generar Rutina</button>
             </div>
-
           </fieldset>
         </form>
       </div>
     </div>
   </div>
 </main>
+
+<script>
+function enviarFormulario() {
+  const form = document.getElementById('rutinaForm');
+  const formData = new FormData(form);
+  const data = {};
+  
+  formData.forEach((value, key) => {
+    data[key] = value;
+  });
+
+  fetch('http://127.0.0.1:5000/rutina', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+    // Aquí rediriges a tu controlador de rutina con la respuesta
+    enviarRespuestaAlControlador(data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+function enviarRespuestaAlControlador(rutinaGenerada) {
+  // Usamos fetch para enviar la respuesta al controlador
+  fetch('index.php?c=rutina&a=generar', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(rutinaGenerada) // Enviar la respuesta generada
+  });
+}
+
+</script>
 
 <?php
 require_once 'includes/footer.php';

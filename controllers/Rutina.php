@@ -32,8 +32,9 @@ class RutinaController
     require_once('views/rutina/V_inicioRutina.php');
   }
 
-  public function ver(){
-    if(isset($_GET['id'])){
+  public function ver()
+  {
+    if (isset($_GET['id'])) {
       $rutina = $this->rutinaModel->getRutina($_GET['id']);
       $ejercicios = $this->rutinaModel->getEjerciciosRutina($rutina);
       require_once('views/rutina/V_rutina.php');
@@ -74,20 +75,55 @@ class RutinaController
       $tipo_rutina = $_POST['tipo_rutina'];
       $dias = $_POST['dias'];
       $duracion = $_POST['duracion'];
+      $equipo = $_POST['equipo'];
+      $imc = $_POST['imc']; // si lo necesitas
 
       // Validar datos
-      if (empty($nombre_rutina) || empty($tipo_rutina) || empty($dias) || empty($duracion)) {
+      if (empty($nombre_rutina) || empty($tipo_rutina) || empty($dias) || empty($duracion) || empty($equipo)) {
         header("Location: index.php?c=rutina&a=crear&e=1");
         return;
       }
 
-      if (strlen($nombre_rutina) > 45) {
-        header("Location: index.php?c=rutina&a=crear&e=2");
-        return;
-      }
+      // Lógica para enviar datos al microservicio
+      $data = [
+        'nombre_rutina' => $nombre_rutina,
+        'tipo_rutina' => $tipo_rutina,
+        'dias' => $dias,
+        'duracion' => $duracion,
+        'equipo' => $equipo,
+        'imc' => $imc
+      ];
 
-      $this->rutinaModel->generarRutina($usuario, $nombre_rutina, $tipo_rutina, $dias, $duracion);
-      
+      $response = $this->llamarMicroservicio($data);
+
+      if ($response) {
+        // Aquí puedes procesar la respuesta y guardarla en la base de datos
+        $id_rutina = $this->rutinaModel->insertarRutina($usuario, $response);
+        header("Location: index.php?c=rutina&a=ver&id=" . $id_rutina . "&e=1"); // Redirige a la vista de rutina
+      } else {
+        header("Location: index.php?c=rutina&a=crear&e=3"); // Error al generar la rutina
+      }
     }
+  }
+
+  // Método para llamar al microservicio
+  private function llamarMicroservicio($data)
+  {
+    $url = 'http://127.0.0.1:5000/rutina'; // Cambia esta URL a la de tu microservicio
+    $options = [
+      'http' => [
+        'header'  => "Content-type: application/json\r\n",
+        'method'  => 'POST',
+        'content' => json_encode($data),
+      ],
+    ];
+    $context  = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+
+    if ($result === FALSE) {
+      return null; // Maneja el error
+    }
+
+    return json_decode($result, true); // Retorna la respuesta como array
   }
 }

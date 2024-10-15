@@ -113,33 +113,6 @@ $usuario = $_SESSION['usuario'];
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-// Función para ajustar el tamaño de los cards PRUEBA // ********************************************************************************************************************
-/*
-function ajustarAnchoCard() {
-    var screenWidth = window.innerWidth;
-    var cardElements = document.querySelectorAll('.dynamic-card'); // Selecciona todos los elementos con la clase dynamic-card
-    if (screenWidth <= 768) {
-      cardElements.forEach(function(card) {
-        card.style.flex = '1 1 25%';
-        card.style.maxWidth = 'calc(60% - 1rem)';
-        card.style.minWidth = 'calc(60% - 1rem)';
-
-      });
-    } else {
-      cardElements.forEach(function(card) {
-        card.style.flex = '1 1 25%';
-        card.style.maxWidth = 'calc(25% - 1rem)';
-      });
-    }
-  }
-
-  // Ajustar el ancho al cargar la página y al cambiar el tamaño de la ventana
-  window.onload = ajustarAnchoCard;
-  window.onresize = ajustarAnchoCard;
-*/
-// ******************************************************************************************************************** 
-
-
   // Función para cargar las instrucciones en la modal
   const modalInstrucciones = document.getElementById('modalInstrucciones');
   modalInstrucciones.addEventListener('show.bs.modal', function(event) {

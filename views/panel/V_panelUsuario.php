@@ -6,7 +6,9 @@ $usuario = $_SESSION['usuario'];
 ?>
 
 <main>
+<div class="panel-usuario">
   <div class="container">
+  <link rel="stylesheet" href="src/css/responsive.css">
     <h1 class="text-light text-center mt-2"><strong><?php echo $usuario['nombre'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_m']; ?></strong></h1>
 
     <div class="d-flex justify-content-center">
@@ -115,6 +117,7 @@ $usuario = $_SESSION['usuario'];
       </div>
     </div>
   </div>
+</div>
 </main>
 
 <?php require_once 'includes/footer.php' ?>

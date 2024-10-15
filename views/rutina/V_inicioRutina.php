@@ -5,6 +5,8 @@ $usuario = $_SESSION['usuario'];
 ?>
 
 <main>
+<link rel="stylesheet" href="src/css/responsive.css">
+<div class="panel-tabla-rutinas">
   <div class="container">
     <h1 class="text-light text-center mt-2"><strong>RUTINAS</strong></h1>
     <h1 class="text-light text-center mt-2"><strong><?php echo $usuario['nombre'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_m']; ?></strong></h1>
@@ -45,6 +47,7 @@ $usuario = $_SESSION['usuario'];
       }
     }
     ?>
+    <div class="table-responsive"> <!-- Tabla con scroll en pantallas pequeñas -->
     <table class="table table-dark table-striped table-bordered table-hover text-center">
       <thead>
         <tr>
@@ -76,7 +79,9 @@ $usuario = $_SESSION['usuario'];
         <?php endforeach; ?>
       </tbody>
     </table>
+    </div>
   </div>
+</div>
 </main>
 
 <?php require_once 'includes/footer.php' ?>

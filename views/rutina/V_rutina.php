@@ -5,6 +5,8 @@ $usuario = $_SESSION['usuario'];
 ?>
 
 <main>
+<link rel="stylesheet" href="src/css/responsive.css">
+<div class="panel-rutina">
   <div class="container">
     <h1 class="text-light text-center mt-2"><strong>Rutina <?php echo htmlspecialchars($rutina['nombre_rutina']); ?></strong></h1>
     <h5 class="text-light text-center mt-2"><strong><?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_m']); ?></strong></h5>
@@ -47,11 +49,12 @@ $usuario = $_SESSION['usuario'];
 
                   // Mostrar los ejercicios para este día
                   if (isset($ejercicios[$dia])) {
-                    echo "<div class='mb-4 d-flex flex-wrap justify-content-center'>"; // Comienza el contenedor para los ejercicios
+                    echo "<div class='mb-5 d-flex flex-wrap justify-content-center'>"; // Comienza el contenedor para los ejercicios
 
                     // Itera sobre cada ejercicio
                     foreach ($ejercicios[$dia] as $ejercicio) {
-                      echo "<div class='card ms-1 me-1 mb-2' style='flex: 1 1 25%; max-width: calc(25% - 1rem);'>"; // Ajusta el ancho según tus necesidades
+                      echo "<div class='card dynamic-card ms-1 me-1 mb-2' style='flex: 1 1 25%; max-width: calc(25% - 1rem);'>"; // Ajusta el ancho según tus necesidades AJUSTE DE ANCHO
+                      
 
                       echo "<img src='" . htmlspecialchars($ejercicio['gif_url']) . "' alt='Imagen de " . htmlspecialchars($ejercicio['nombre']) . "' class='card-img-top' style='width: 100%; height: 150px; object-fit: cover;'>";
                       echo "<div class='card-body p-2'>";
@@ -83,6 +86,7 @@ $usuario = $_SESSION['usuario'];
       <?php } ?>
     </div>
   </div>
+</div>
 </main>
 
 <!-- Modal para mostrar instrucciones -->
@@ -108,6 +112,33 @@ $usuario = $_SESSION['usuario'];
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
+// Función para ajustar el tamaño de los cards PRUEBA // ********************************************************************************************************************
+/*
+function ajustarAnchoCard() {
+    var screenWidth = window.innerWidth;
+    var cardElements = document.querySelectorAll('.dynamic-card'); // Selecciona todos los elementos con la clase dynamic-card
+    if (screenWidth <= 768) {
+      cardElements.forEach(function(card) {
+        card.style.flex = '1 1 25%';
+        card.style.maxWidth = 'calc(60% - 1rem)';
+        card.style.minWidth = 'calc(60% - 1rem)';
+
+      });
+    } else {
+      cardElements.forEach(function(card) {
+        card.style.flex = '1 1 25%';
+        card.style.maxWidth = 'calc(25% - 1rem)';
+      });
+    }
+  }
+
+  // Ajustar el ancho al cargar la página y al cambiar el tamaño de la ventana
+  window.onload = ajustarAnchoCard;
+  window.onresize = ajustarAnchoCard;
+*/
+// ******************************************************************************************************************** 
+
 
   // Función para cargar las instrucciones en la modal
   const modalInstrucciones = document.getElementById('modalInstrucciones');

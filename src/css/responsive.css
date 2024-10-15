@@ -1,0 +1,109 @@
+
+/***** PANEL USUARIO *****/
+@media ( max-width: 990px ) {
+  .panel-usuario .col-3, .col-2 {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 1rem;
+  }
+  .panel-usuario .col-4 {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 1.5rem;
+  }
+  .panel-usuario .d-flex {
+      flex-direction: column;
+      align-items: center;
+  }
+  .panel-usuario .card {
+      width: 100%;
+  }
+  .panel-usuario .card-title {
+      font-size: 1.5rem;
+  }
+  .panel-usuario .card-text {
+      font-size: 1.2rem;
+  }
+  .panel-usuario .card-header {
+      padding: auto;
+  }
+  .panel-usuario .btn {
+    width: 100%;
+    margin: auto;
+  }
+
+}
+
+
+/***** PANEL TABLA DE RUTINAS *****/
+@media (max-width: 990px) {
+  .panel-tabla-rutinas .btn-sm {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+  }
+  .panel-tabla-rutinas .table-responsive {
+    overflow-x: auto;
+  }
+  .panel-tabla-rutinas th, td {
+    white-space: nowrap;
+  }
+}
+
+
+
+
+
+/***** PANEL VER RUTINA /*****/
+@media (max-width: 768px) {
+  /* Reducir aún más el tamaño de los títulos */
+  
+
+  /* Ajustar el contenedor flex para botones */
+  .panel-rutina .d-flex {
+    flex-direction: column; /* Alinea verticalmente los botones */
+    align-items: center; /* Centra los elementos */
+  }
+
+  /* Botón para regresar */
+  .panel-rutina .btn-info {
+    width: 100%; /* El botón ocupará todo el ancho disponible */
+    margin-bottom: 1rem; /* Añade margen debajo del botón */
+  }
+
+  /* Tarjetas de ejercicios */
+  .panel-rutina .card {
+    flex: 1 1 100%; /* Las tarjetas ahora ocuparán todo el ancho */
+    max-width: 100%; /* Limita el ancho máximo */
+  }
+
+  /* Imágenes de los ejercicios */
+  .panel-rutina .card-img-top {
+    height: 150px; /* Ajusta la altura de la imagen */
+  }
+
+  /* Ajustar el modal */
+  .panel-rutina .modal-lg {
+    max-width: 100%; /* El modal ocupará casi todo el ancho */
+  }
+
+  .panel-rutina .modal-body {
+    font-size: 0.9em; /* Ajusta el tamaño del texto dentro del modal */
+  }
+  .panel-rutina .mb-4 {
+    margin-bottom: 1rem;
+  }
+        
+}
+/* Ajustar el tamaño de las tarjetas de ejercicios */
+.dynamic-card { /* Default NO MOVER  */
+  flex: 1 1 25%;
+  max-width: calc(25% - 1rem);
+}
+
+@media (max-width: 768px) { /* Ajuste de tamaño en responsive */ 
+  .dynamic-card {
+    flex: 1 1 25%;
+    max-width: 75%;
+    min-width: 75%;
+  }
+}

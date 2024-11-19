@@ -26,7 +26,7 @@ def filtrar_rutinas(tipo_rutina, dias_semana, duracion, equipamiento, imc):
     elif tipo_rutina == 'Fuerza':
         df_filtered = df[~df['partecuerpo'].str.contains('Cardio')]
     elif tipo_rutina == 'Flexibilidad':
-        df_filtered = df[df['partecuerpo'].str.contains('cintura')]
+        df_filtered = df[df['partecuerpo'].str.contains('Cintura')]
 
     # Filtrar por Equipamiento
     if equipamiento == 'Sin equipo':

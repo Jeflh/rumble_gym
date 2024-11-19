@@ -3,6 +3,7 @@
 class AsistenciaController{
   private $auth;
   private $listaInterna;
+  private $historialModel;
 
   public function __construct(){
     $this->auth = autenticado();
@@ -11,8 +12,10 @@ class AsistenciaController{
     }
     require_once('models/M_asistencia.php');
     require_once('models/M_usuario.php');
+    require_once('models/M_historial_peso.php');
 
     $usuarios = new UsuarioModel();
+    $this->historialModel = new HistorialPesoModel();
     $this->listaInterna = $usuarios->getAll();
   }
   
@@ -41,6 +44,19 @@ class AsistenciaController{
       }
 
       header('Location: index.php?c=login&a=cerrar&e=0');
+    }
+  }
+
+  public function historial() {
+    if (isset($_GET['id'])) {
+        $id_usuario = $_GET['id'];
+
+        $historial = $this->historialModel->getHistorialByUsuario($id_usuario);
+        if ($historial) {
+            require_once('views/usuario/V_historialPeso.php');
+        } else {
+            header('Location: index.php?c=usuario&e=7');
+        }
     }
   }
 }

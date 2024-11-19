@@ -4,6 +4,7 @@ class UsuarioController{
   private $auth;
   private $usuarioModel;
   private $ventaModel;
+  private $historialModel;
 
   public function __construct(){
     $this->auth = autenticado();
@@ -15,8 +16,10 @@ class UsuarioController{
     }
     require_once('models/M_usuario.php');
     require_once('models/M_venta.php');
+    require_once('models/M_historial_peso.php');
     $this->usuarioModel = new UsuarioModel();
     $this->ventaModel = new VentaModel();
+    $this->historialModel = new HistorialPesoModel();
   }
 
   public function index(){
@@ -50,6 +53,8 @@ class UsuarioController{
         'fecha_venta' => date('Y-m-d'),
         'monto_venta' => $costo
       );
+
+      $this->historialModel->insertHistorial($_POST['id_usuario'], $_POST['peso'], date('Y-m-d'));
       
       $resultado = $this->usuarioModel->insertUsuario();
       if($resultado){
@@ -93,6 +98,9 @@ class UsuarioController{
 
   public function actualizar(){
     if(isset($_POST)){
+      var_dump($_POST['id_usuario']); // Verifica aquí el valor de id_usuario
+      $resultado = $this->historialModel->insertHistorial($_POST['id_usuario'], $_POST['peso'], date('Y-m-d'));
+      var_dump($_POST['id_usuario']); // Verifica aquí el valor de id_usuario
       $resultado = $this->usuarioModel->updateUsuario($_POST['id_usuario']);
       if($resultado){
         header('Location: index.php?c=usuario&e=1');

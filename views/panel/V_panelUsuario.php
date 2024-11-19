@@ -29,26 +29,12 @@ $usuario = $_SESSION['usuario'];
           <p class="card-text"><strong>Peso: </strong><?php echo $usuario['peso'] . 'kg'; ?></p>
           <p class="card-text"><strong>Estatura: </strong><?php echo $usuario['altura'] . 'mts'; ?></p>
           <p class="card-text"><strong>IMC: </strong><?php echo $usuario['imc']; ?></p>
-        </div>
-      </div>
-      <!-- Bloque 4 -->
-      <div class="col-2 card bg-dark text-light mt-3 me-3 text-center justify-content-center">
-        <div class="card-header">
-          <h3 class="card-title">Rutinas</h3>
-        </div>
-
-        <div class="card-body">
-          <!-- NUEVA RUTINA -->
           <div class="d-flex justify-content-center">
-            <a href="index.php?c=rutina&a=crear" class="btn btn-light">Crear rutina</a>
-          </div>
-
-          <!-- CONSULTAR RUTINAS -->
-          <div class="d-flex justify-content-center mt-4">
-            <a href="index.php?c=rutina" class="btn btn-light">Ver mis rutinas</a>
+            <a href="index.php?c=asistencia&a=historial&id=<?php echo $usuario['id_usuario']; ?>" class="btn btn-light"> Consultar historial</a>
           </div>
         </div>
       </div>
+
       <!-- Bloque 2 -->
       <div class="col-3 card bg-dark text-light mt-3">
         <div class="card-header">
@@ -82,37 +68,24 @@ $usuario = $_SESSION['usuario'];
           </h5>
           <p class="card-text"><strong>Inicio: </strong><?php echo date("d-m-Y", strtotime($usuario['fecha_inicio'])); ?></p>
           <p class="card-text"><strong>Fin: </strong><?php echo date("d-m-Y", strtotime($usuario['fecha_fin'])); ?></p>
+          <p class="card-text"><strong>Miembro desde: </strong> <?php echo date("d-m-Y", strtotime($usuario['inscrito'])); ?></p>
         </div>
       </div>
     </div>
 
     <!-- Bloque 3 -->
-    <div class="d-flex justify-content-center">
-      <div class="col-4 card bg-dark text-light mt-3 me-3 mb-3">
+    <div class="d-flex justify-content-center mb-3">
+      <div class="col-2 card bg-dark text-light mt-3 me-3 text-center justify-content-center">
         <div class="card-header">
-          <h3 class="card-title text-center">Datos personales</h3>
+          <h3 class="card-title">Rutinas</h3>
         </div>
         <div class="card-body">
-          <p class="card-text"><strong>Estado: </strong><?php echo $estado = ($usuario['estado'] == '1') ? 'Activo ' : 'Inactivo '; ?>
-            <?php
-            if ($usuario['estado'] == '1') {
-              echo '<span class="text-success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg></span>';
-            } else if ($usuario['estado'] == '0') {
-              echo '<span class="text-warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-              </svg></span>';
-            }
-            ?></p>
-          <p class="card-text"><strong>Código: </strong><?php echo $usuario['id_usuario']; ?></p>
-          <p class="card-text"><strong>Nombre: </strong><?php echo $usuario['nombre'] . ' ' . $usuario['apellido_p'] . ' ' . $usuario['apellido_m']; ?></p>
-          <p class="card-text"><strong>Sexo: </strong><?php echo $sexo = ($usuario['sexo'] == 'M') ? 'Masculino' : 'Femenino' ?></p>
-          <p class="card-text"><strong>Fecha de nacimiento: </strong><?php echo date("d-m-Y", strtotime($usuario['fecha_nac'])); ?></p>
-          <p class="card-text"><strong>Domicilio: </strong><?php echo $usuario['domicilio']; ?></p>
-          <p class="card-text"><strong>Teléfono: </strong><?php echo $usuario['telefono']; ?></p>
-          <p class="card-text"><strong>Miembro desde: </strong> <?php echo date("d-m-Y", strtotime($usuario['inscrito'])); ?></p> <!-- Fecha de inscripción -->
+          <div class="d-flex justify-content-center">
+            <a href="index.php?c=rutina&a=crear" class="btn btn-light">Crear rutina</a>
+          </div>
+          <div class="d-flex justify-content-center mt-4">
+            <a href="index.php?c=rutina" class="btn btn-light">Ver mis rutinas</a>
+          </div>
         </div>
       </div>
     </div>

@@ -54,8 +54,8 @@ $usuario = $_SESSION['usuario'];
           <th scope="col">ID Rutina</th>
           <th scope="col">Nombre</th>
           <th scope="col">Tipo de Rutina</th>
-          <th scope="col">Dias Disponibles por Semana</th>
-          <th scope="col">Duración de las Sesiones</th>
+          <th scope="col">Dias</th>
+          <th scope="col">Duración</th>
           <th scope="col">Eliminar</th>
         </tr>
       </thead>

@@ -109,7 +109,7 @@ class RutinaController
   // Método para llamar al microservicio
   private function llamarMicroservicio($data)
   {
-    $url = 'http://127.0.0.1:5000/rutina'; // Cambia esta URL a la de tu microservicio
+    $url = 'https://rumblegym.pythonanywhere.com/rutina'; // Cambia esta URL a la de tu microservicio
     $options = [
       'http' => [
         'header'  => "Content-type: application/json\r\n",

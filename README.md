@@ -11,14 +11,14 @@
 # CUENTAS DE ACCESO
 
 #### Cuenta empleado de prueba
-Código: 1111
+Código: 11111
 Contraseña: 1234
 
 #### Cuentas usuarios de prueba
 Código: 12345
 Fecha de nacimiento: 21/02/2000
 
-Código: 46741
+Código: 58677
 Fecha de nacimiento: 04/06/2001
 
 # Descripción del proyecto
